@@ -297,10 +297,16 @@ class RankingService:
             games_won = sum(1 for game in games if game.status == "won")
             win_rate = (games_won / total_games * 100) if total_games > 0 else 0
             
-            # Obter pontuações
-            scores = [game.final_score for game in games if game.final_score is not None]
-            best_score = max(scores) if scores else 0
-            average_score = sum(scores) / len(scores) if scores else 0
+            # Pontuação: APENAS se tiver vitórias!
+            if games_won > 0:
+                # Pegar scores apenas dos jogos ganhos
+                scores = [game.final_score for game in games if game.status == "won" and game.final_score is not None]
+                best_score = max(scores) if scores else 0
+                average_score = sum(scores) / len(scores) if scores else 0
+            else:
+                # Sem vitórias = sem pontos!
+                best_score = 0
+                average_score = 0
             
             ranking = PlayerRankingEntry(
                 rank=0,  # Será definido após ordenação
