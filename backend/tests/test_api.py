@@ -68,7 +68,7 @@ class TestAuthEndpoints:
         )
         
         assert response.status_code == 400
-        assert "already exists" in response.json()["detail"]
+        assert "já existe" in response.json()["detail"]
     
     def test_login_success(self, client, db, test_user_data):
         """Testar login bem-sucedido."""
@@ -79,7 +79,7 @@ class TestAuthEndpoints:
         response = client.post(
             "/api/auth/login",
             json={
-                "username": test_user_data["username"],
+                "email": test_user_data["username"],
                 "password": test_user_data["password"]
             }
         )
@@ -99,7 +99,7 @@ class TestAuthEndpoints:
         response = client.post(
             "/api/auth/login",
             json={
-                "username": test_user_data["email"],
+                "email": test_user_data["email"],
                 "password": test_user_data["password"]
             }
         )
@@ -116,20 +116,20 @@ class TestAuthEndpoints:
         response = client.post(
             "/api/auth/login",
             json={
-                "username": test_user_data["username"],
+                "email": test_user_data["username"],
                 "password": "wrongpassword"
             }
         )
         
         assert response.status_code == 401
-        assert "Invalid credentials" in response.json()["detail"]
+        assert "inválidas" in response.json()["detail"].lower()
     
     def test_login_nonexistent_user(self, client):
         """Testar login com usuário inexistente."""
         response = client.post(
             "/api/auth/login",
             json={
-                "username": "nonexistent",
+                "email": "nonexistent",
                 "password": "password"
             }
         )
@@ -263,7 +263,7 @@ class TestHealthEndpoints:
         
         assert response.status_code == 200
         data = response.json()
-        assert data["status"] == "healthy"
+        assert data["status"] == "saudável"
     
     def test_root_endpoint(self, client):
         """Testar endpoint raiz."""
@@ -272,4 +272,4 @@ class TestHealthEndpoints:
         assert response.status_code == 200
         data = response.json()
         assert "api" in data
-        assert "version" in data
+        assert "versao" in data
