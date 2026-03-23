@@ -25,15 +25,15 @@
 }
 
 .alerta-erro {
-  background: #FEE2E2;
-  color: #991B1B;
-  border: 1px solid #FCA5A5;
+  background: #3b1515;
+  color: #fca5a5;
+  border: 1px solid #5a2020;
 }
 
 .alerta-info {
-  background: #DBEAFE;
-  color: #1E40AF;
-  border: 1px solid #93C5FD;
+  background: #1a2a40;
+  color: #93c5fd;
+  border: 1px solid #1e3a5f;
 }
 
 /* Layout Principal */
@@ -46,15 +46,16 @@
 
 /* Painel de Tentativas */
 .painel-tentativas {
-  background: white;
+  background: #252525;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid #3a3a3a;
 }
 
 .painel-tentativas h3 {
   margin: 0 0 1rem 0;
-  color: #1F2937;
+  color: #c9a84c;
   font-size: 1.3rem;
 }
 
@@ -79,35 +80,35 @@
 }
 
 .lista-tentativas::-webkit-scrollbar-track {
-  background: #F3F4F6;
+  background: #1a1a1a;
   border-radius: 3px;
 }
 
 .lista-tentativas::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
+  background: #3a3a3a;
   border-radius: 3px;
 }
 
 .lista-tentativas::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: #555;
 }
 
 .card-tentativa {
-  background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
   border-radius: 8px;
   padding: 1rem;
   transition: all 0.3s ease;
 }
 
 .card-tentativa:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: white;
+  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.1);
+  background: #222;
 }
 
 .numero-tentativa {
   font-weight: 600;
-  color: #3B82F6;
+  color: #c9a84c;
   font-size: 0.85rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
@@ -124,8 +125,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #DDD;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #555;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .feedback-tentativa {
@@ -139,32 +140,32 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  background: white;
+  background: #252525;
   border-radius: 6px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #3a3a3a;
 }
 
 .feedback-item .label {
   font-size: 0.8rem;
-  color: #666;
+  color: #999;
   font-weight: 600;
 }
 
 .feedback-item .valor {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #3B82F6;
+  color: #c9a84c;
 }
 
 .progresso-tentativas {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #E5E7EB;
+  border-top: 1px solid #3a3a3a;
 }
 
 .progressbar {
   height: 8px;
-  background: #E5E7EB;
+  background: #3a3a3a;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -172,7 +173,7 @@
 
 .progressbar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+  background: linear-gradient(90deg, #c9a84c, #dfc06a);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -180,41 +181,42 @@
 .texto-progresso {
   margin: 0;
   font-size: 0.85rem;
-  color: #666;
+  color: #999;
   text-align: center;
 }
 
 /* Painel de Seleção */
 .painel-selecao {
-  background: white;
+  background: #252525;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  border: 1px solid #3a3a3a;
 }
 
 .painel-selecao h3 {
   margin: 0;
-  color: #1F2937;
+  color: #c9a84c;
   font-size: 1.3rem;
 }
 
 .titulo-area {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #666;
+  color: #999;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
 
 /* Sequência Selecionada */
 .area-selecao-atual {
-  background: #F9FAFB;
+  background: #1a1a1a;
   padding: 1rem;
   border-radius: 8px;
-  border: 2px dashed #D1D5DB;
+  border: 2px dashed #3a3a3a;
 }
 
 .sequencia-selecionada {
@@ -254,16 +256,16 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: white;
-  border: 3px dashed #D1D5DB;
+  background: #1a1a1a;
+  border: 3px dashed #3a3a3a;
 }
 
 /* Seletor de Cores */
 .seletor-cores {
-  background: #F9FAFB;
+  background: #1a1a1a;
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #3a3a3a;
 }
 
 .grades-cores {
@@ -313,13 +315,14 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #c9a84c 0%, #a07e2e 100%);
+  color: #111;
+  font-weight: 700;
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 20px rgba(201, 168, 76, 0.3);
 }
 
 .btn-primary:disabled {
@@ -333,12 +336,12 @@
 }
 
 .btn-secondary {
-  background: #E5E7EB;
-  color: #374151;
+  background: #3a3a3a;
+  color: #ddd;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #D1D5DB;
+  background: #4a4a4a;
   transform: translateY(-2px);
 }
 
@@ -387,13 +390,14 @@
 }
 
 .card-final {
-  background: white;
+  background: #252525;
   border-radius: 12px;
   padding: 2rem;
   max-width: 500px;
   width: 90%;
   text-align: center;
   animation: zoomIn 0.3s ease-out;
+  border: 1px solid #3a3a3a;
 }
 
 @keyframes zoomIn {
@@ -408,7 +412,7 @@
 }
 
 .titulo-vitoria {
-  color: #22C55E;
+  color: #c9a84c;
   font-size: 2rem;
   margin: 0 0 1.5rem 0;
 }
@@ -425,8 +429,9 @@
   gap: 1rem;
   margin-bottom: 2rem;
   padding: 1rem;
-  background: #F9FAFB;
+  background: #1a1a1a;
   border-radius: 8px;
+  border: 1px solid #3a3a3a;
 }
 
 .stat {
@@ -437,13 +442,13 @@
 
 .stat .label {
   font-size: 0.85rem;
-  color: #666;
+  color: #999;
   font-weight: 600;
 }
 
 .stat .valor {
   font-size: 1.5rem;
-  color: #3B82F6;
+  color: #c9a84c;
   font-weight: 700;
 }
 
@@ -469,13 +474,14 @@
 }
 
 .modal-content {
-  background: white;
+  background: #252525;
   border-radius: 12px;
   padding: 2rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.3s ease-out;
+  border: 1px solid #3a3a3a;
 }
 
 @keyframes slideUp {
@@ -491,30 +497,31 @@
 
 .modal-content h2 {
   margin: 0 0 1rem 0;
-  color: #1F2937;
+  color: #c9a84c;
   font-size: 1.5rem;
 }
 
 .modal-content p {
-  color: #6B7280;
+  color: #999;
   margin: 0 0 1.5rem 0;
 }
 
 .info-jogo-anterior {
-  background: #F3F4F6;
+  background: #1a1a1a;
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1.5rem;
+  border: 1px solid #3a3a3a;
 }
 
 .info-jogo-anterior p {
   margin: 0.5rem 0;
   font-size: 0.95rem;
-  color: #374151;
+  color: #bbb;
 }
 
 .info-jogo-anterior strong {
-  color: #1F2937;
+  color: #c9a84c;
 }
 
 .botoes-conflito {

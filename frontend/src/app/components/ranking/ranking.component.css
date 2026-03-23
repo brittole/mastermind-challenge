@@ -15,7 +15,8 @@
 .ranking-header h2 {
   margin: 0 0 0.5rem 0;
   font-size: 2.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #c9a84c;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .subtitulo {
@@ -29,9 +30,9 @@
   display: block;
   margin: 0 auto 2rem auto;
   padding: 0.75rem 1.5rem;
-  background: white;
-  color: #667eea;
-  border: none;
+  background: transparent;
+  color: #c9a84c;
+  border: 1px solid #c9a84c;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -39,8 +40,10 @@
 }
 
 .btn-atualizar:hover:not(:disabled) {
+  background: #c9a84c;
+  color: #111;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(201, 168, 76, 0.3);
 }
 
 .btn-atualizar:disabled {
@@ -68,9 +71,9 @@
 }
 
 .alerta-erro {
-  background: #FEE2E2;
-  color: #991B1B;
-  border: 1px solid #FCA5A5;
+  background: #3b1515;
+  color: #fca5a5;
+  border: 1px solid #5a2020;
 }
 
 /* Carregando */
@@ -113,45 +116,48 @@
 }
 
 .card-resumo {
-  background: white;
+  background: #252525;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
+  border: 1px solid #3a3a3a;
 }
 
 .card-resumo:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  border-color: #c9a84c;
 }
 
 .numero-grande {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: #c9a84c;
   margin-bottom: 0.5rem;
 }
 
 .label {
   font-size: 0.95rem;
-  color: #666;
+  color: #999;
   font-weight: 600;
   text-transform: uppercase;
 }
 
 /* Seção de Ranking */
 .secao-ranking {
-  background: white;
+  background: #252525;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   margin-bottom: 2rem;
+  border: 1px solid #3a3a3a;
 }
 
 .secao-ranking h3 {
   margin: 0 0 1.5rem 0;
-  color: #1F2937;
+  color: #c9a84c;
   font-size: 1.5rem;
 }
 
@@ -166,7 +172,7 @@
 .tabela-wrapper {
   overflow-x: auto;
   border-radius: 8px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #3a3a3a;
 }
 
 /* Tabela */
@@ -176,8 +182,8 @@
 }
 
 .cabecalho-tabela {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+  color: #c9a84c;
   font-weight: 600;
 }
 
@@ -204,31 +210,31 @@
 
 /* Linhas */
 .linha-ranking {
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #3a3a3a;
   transition: all 0.3s ease;
 }
 
 .linha-ranking:hover {
-  background: #F9FAFB;
+  background: #2a2a2a;
 }
 
 .linha-ranking.top-3 {
-  background: #FFFBEB;
+  background: #2a2510;
 }
 
 .linha-ranking.top-3:hover {
-  background: #FEF3C7;
+  background: #3a3218;
 }
 
 .linha-ranking td {
   padding: 1rem;
-  color: #374151;
+  color: #ddd;
 }
 
 /* Célula de Posição */
 .numero-posicao {
   font-weight: 600;
-  color: #667eea;
+  color: #c9a84c;
 }
 
 .medalha {
@@ -246,24 +252,24 @@
 .avatar {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a84c 0%, #a07e2e 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #111;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .nome {
   font-weight: 600;
-  color: #1F2937;
+  color: #eee;
 }
 
 .email {
   font-size: 0.85rem;
-  color: #999;
+  color: #777;
 }
 
 /* Badges */
@@ -277,29 +283,30 @@
 }
 
 .badge-vitoria {
-  background: #DBEAFE;
-  color: #1E40AF;
+  background: #1a2a40;
+  color: #93c5fd;
 }
 
 .badge-bom {
-  background: #DCFCE7;
-  color: #15803D;
+  background: #1a2e1a;
+  color: #86efac;
 }
 
 .badge-regular {
-  background: #FEE2E2;
-  color: #991B1B;
+  background: #3b1515;
+  color: #fca5a5;
 }
 
 /* Legenda */
 .legenda {
-  background: white;
+  background: #252525;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
+  border: 1px solid #3a3a3a;
 }
 
 .item-legenda {
@@ -307,7 +314,7 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 0.95rem;
-  color: #666;
+  color: #999;
 }
 
 .item-legenda .badge {

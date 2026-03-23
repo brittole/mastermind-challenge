@@ -2,17 +2,17 @@
 
 /* Reset e Variáveis CSS */
 :root {
-  --primary-color: #667eea;
-  --secondary-color: #764ba2;
+  --primary-color: #c9a84c;
+  --secondary-color: #a07e2e;
   --success-color: #22C55E;
   --warning-color: #FBBF24;
   --danger-color: #EF4444;
-  --dark-color: #1F2937;
-  --light-color: #F9FAFB;
-  --border-color: #E5E7EB;
-  --text-color: #374151;
+  --dark-color: #1a1a1a;
+  --light-color: #f5f0e6;
+  --border-color: #3a3a3a;
+  --text-color: #e8e0d0;
   --border-radius: 8px;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   
   /* Fontes */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -37,7 +37,14 @@ body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   color: var(--text-color);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #1a1a1a;
+  background-image:
+    linear-gradient(45deg, #222 25%, transparent 25%),
+    linear-gradient(-45deg, #222 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #222 75%),
+    linear-gradient(-45deg, transparent 75%, #222 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
   min-height: 100vh;
   line-height: 1.6;
 }
@@ -59,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: var(--secondary-color);
+  color: #dfc06a;
 }
 
 /* Inputs e Form */
@@ -99,12 +106,12 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(201, 168, 76, 0.4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(201, 168, 76, 0.6);
 }
 
 /* Container */
