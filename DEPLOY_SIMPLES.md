@@ -67,7 +67,7 @@ Pronto! ✅ Seu código está no GitHub
 3. Configure:
    - **Name**: `mastermind-db`
    - **Database**: `mastermind_db`
-   - **User**: `postgres`
+   - **User**: `mastermind_user` (não pode ser "postgres")
    - **Plan**: `Free`
 4. Clique **"Create Database"**
 5. **AGUARDE CRIAR** (~2 min)
