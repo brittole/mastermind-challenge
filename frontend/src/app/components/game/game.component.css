@@ -1,0 +1,611 @@
+/* Estilos do Componente de Jogo */
+
+.jogo-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.alerta {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alerta-erro {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+}
+
+.alerta-info {
+  background: #DBEAFE;
+  color: #1E40AF;
+  border: 1px solid #93C5FD;
+}
+
+/* Layout Principal */
+.jogo-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Painel de Tentativas */
+.painel-tentativas {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.painel-tentativas h3 {
+  margin: 0 0 1rem 0;
+  color: #1F2937;
+  font-size: 1.3rem;
+}
+
+.sem-tentativas {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.lista-tentativas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.lista-tentativas::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lista-tentativas::-webkit-scrollbar-track {
+  background: #F3F4F6;
+  border-radius: 3px;
+}
+
+.lista-tentativas::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 3px;
+}
+
+.lista-tentativas::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
+
+.card-tentativa {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card-tentativa:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.numero-tentativa {
+  font-weight: 600;
+  color: #3B82F6;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.cores-adivinhed {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.circulo-cor {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #DDD;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-tentativa {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.feedback-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #E5E7EB;
+}
+
+.feedback-item .label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.feedback-item .valor {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #3B82F6;
+}
+
+.progresso-tentativas {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.progressbar {
+  height: 8px;
+  background: #E5E7EB;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressbar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.texto-progresso {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Painel de Seleção */
+.painel-selecao {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.painel-selecao h3 {
+  margin: 0;
+  color: #1F2937;
+  font-size: 1.3rem;
+}
+
+.titulo-area {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* Sequência Selecionada */
+.area-selecao-atual {
+  background: #F9FAFB;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px dashed #D1D5DB;
+}
+
+.sequencia-selecionada {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.circulo-selecionado {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.circulo-selecionado:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.circulo-selecionado .numero {
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.circulo-vazio {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  border: 3px dashed #D1D5DB;
+}
+
+/* Seletor de Cores */
+.seletor-cores {
+  background: #F9FAFB;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+}
+
+.grades-cores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.botao-cor {
+  padding: 0.75rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  min-height: 50px;
+}
+
+.botao-cor:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.botao-cor:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Botões de Ação */
+.botoes-acao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-grande {
+  min-height: 50px;
+  font-size: 1.1rem;
+}
+
+.btn-secondary {
+  background: #E5E7EB;
+  color: #374151;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #D1D5DB;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-abandonar {
+  background: #EF4444;
+  color: white;
+}
+
+.btn-abandonar:hover:not(:disabled) {
+  background: #DC2626;
+  transform: translateY(-2px);
+}
+
+.btn-abandonar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Tela Final */
+.tela-final {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-final {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.titulo-vitoria {
+  color: #22C55E;
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.titulo-derrota {
+  color: #EF4444;
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.estatisticas-finais {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat .label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.stat .valor {
+  font-size: 1.5rem;
+  color: #3B82F6;
+  font-weight: 700;
+}
+
+.botoes-finais {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Modal de Conflito - Jogo Ativo Anterior */
+.modal-conflito {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content h2 {
+  margin: 0 0 1rem 0;
+  color: #1F2937;
+  font-size: 1.5rem;
+}
+
+.modal-content p {
+  color: #6B7280;
+  margin: 0 0 1.5rem 0;
+}
+
+.info-jogo-anterior {
+  background: #F3F4F6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-jogo-anterior p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.info-jogo-anterior strong {
+  color: #1F2937;
+}
+
+.botoes-conflito {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.botoes-conflito .btn {
+  width: 100%;
+}
+
+.btn-danger {
+  background: #EF4444;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #DC2626;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .jogo-area {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .grades-cores {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sequencia-selecionada {
+    gap: 0.25rem;
+  }
+
+  .circulo-selecionado,
+  .circulo-vazio {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-tentativa {
+    padding: 0.75rem;
+  }
+
+  .cores-adivinhed {
+    gap: 0.25rem;
+  }
+
+  .circulo-cor {
+    width: 35px;
+    height: 35px;
+  }
+
+  .painel-tentativas,
+  .painel-selecao {
+    padding: 1rem;
+  }
+
+  .lista-tentativas {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .jogo-container {
+    padding: 1rem;
+  }
+
+  .grades-cores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .estatisticas-finais {
+    grid-template-columns: 1fr;
+  }
+
+  .card-final {
+    padding: 1.5rem;
+  }
+
+  .titulo-vitoria,
+  .titulo-derrota {
+    font-size: 1.5rem;
+  }
+}

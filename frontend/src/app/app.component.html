@@ -1,0 +1,27 @@
+<!-- Mastermind - Aplicação Principal -->
+<div class="app-container">
+  <!-- Cabeçalho/Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="navbar-brand" (click)="goHome()">
+        <h1>🔴🔵🟢🟡 {{ title }}</h1>
+      </div>
+
+      <div class="navbar-menu" *ngIf="currentUser">
+        <button class="nav-btn" (click)="goRankings()">🏆 Classificações</button>
+        <span class="user-name">Olá, {{ currentUser.username }}!</span>
+        <button class="nav-btn logout-btn" (click)="logout()">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>Mastermind Challenge - Desenvolvido para demonstrar habilidades em Full Stack</p>
+  </footer>
+</div>

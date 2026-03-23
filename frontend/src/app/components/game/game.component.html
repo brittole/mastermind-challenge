@@ -1,0 +1,193 @@
+<div class="jogo-container">
+  <!-- Tela de Conflito - Jogo Ativo Anterior -->
+  <div class="modal-conflito" *ngIf="mostrando_conflito && jogoAnterior">
+    <div class="modal-content">
+      <h2>Jogo Anterior Ativo</h2>
+      <p>Você já possui um jogo em andamento. Escolha uma opção abaixo:</p>
+      
+      <div class="info-jogo-anterior">
+        <p><strong>Tentativas realizadas:</strong> {{ jogoAnterior.attempts_count }} / {{ NUM_TENTATIVAS_MAX }}</p>
+        <p><strong>Status:</strong> {{ jogoAnterior.status }}</p>
+        <p><strong>Iniciado em:</strong> {{ jogoAnterior.started_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+
+      <div class="botoes-conflito">
+        <button 
+          class="btn btn-primary" 
+          (click)="continuarJogoAnterior()"
+          [disabled]="carregando"
+        >
+          {{ carregando ? 'Carregando...' : 'Continuar Jogo Anterior' }}
+        </button>
+        <button 
+          class="btn btn-danger" 
+          (click)="abandonarAnterioreIniciarNovo()"
+          [disabled]="carregando"
+        >
+          {{ carregando ? 'Abandonando...' : 'Abandonar e Iniciar Novo' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensagens de Status -->
+  <div *ngIf="erro" class="alerta alerta-erro">
+    <strong>Erro:</strong> {{ erro }}
+  </div>
+
+  <div *ngIf="mensagem" class="alerta alerta-info">
+    <strong>{{ jogadorVenceu ? '✓' : '' }}</strong> {{ mensagem }}
+  </div>
+
+  <!-- Área Principal do Jogo -->
+  <div class="jogo-area" *ngIf="jogoAtual">
+    <!-- Painel Esquerdo: Histórico de Tentativas -->
+    <div class="painel-tentativas">
+      <h3>Histórico</h3>
+
+      <div *ngIf="tentativas.length === 0" class="sem-tentativas">
+        Nenhuma tentativa ainda
+      </div>
+
+      <div class="lista-tentativas">
+        <div *ngFor="let tentativa of tentativas; let i = index" class="card-tentativa">
+          <div class="numero-tentativa">Tentativa {{ i + 1 }}</div>
+
+          <div class="cores-adivinhed">
+            <div
+              *ngFor="let cor of tentativa.guess"
+              class="circulo-cor"
+              [style.background-color]="obterCorCSS(cor)"
+              [title]="obterNomeCor(cor)"
+            ></div>
+          </div>
+
+          <div class="feedback-tentativa">
+            <div class="feedback-item">
+              <span class="label">Acertos:</span>
+              <span class="valor">{{ tentativa.correct_positions }}/{{ TAMANHO_SEQUENCIA }}</span>
+            </div>
+            <div class="feedback-item">
+              <span class="label">Semi-acertos:</span>
+              <span class="valor">{{ tentativa.correct_colors }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progresso-tentativas">
+        <div class="progressbar">
+          <div
+            class="progressbar-fill"
+            [style.width.%]="(tentativas.length / NUM_TENTATIVAS_MAX) * 100"
+          ></div>
+        </div>
+        <p class="texto-progresso">
+          {{ tentativas.length }} de {{ NUM_TENTATIVAS_MAX }} tentativas
+        </p>
+      </div>
+    </div>
+
+    <!-- Painel Direito: Seleção de Cores -->
+    <div class="painel-selecao">
+      <h3>Seu Palpite</h3>
+
+      <!-- Seleção Atual -->
+      <div class="area-selecao-atual">
+        <div class="titulo-area">Sequência Selecionada</div>
+        <div class="sequencia-selecionada">
+          <div
+            *ngFor="let cor of coreSelecionadas; let i = index"
+            class="circulo-selecionado"
+            [style.background-color]="obterCorCSS(cor)"
+            (click)="removerUltimaCor()"
+            title="Clique para remover"
+          >
+            <span class="numero">{{ i + 1 }}</span>
+          </div>
+
+          <div
+            *ngFor="let _ of [].constructor(TAMANHO_SEQUENCIA - coreSelecionadas.length)"
+            class="circulo-vazio"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Seletor de Cores -->
+      <div class="seletor-cores">
+        <div class="titulo-area">Escolha as Cores</div>
+        <div class="grades-cores">
+          <button
+            *ngFor="let cor of cores"
+            (click)="adicionarCor(cor)"
+            [disabled]="carregando || jogoTerminado || coreSelecionadas.length >= TAMANHO_SEQUENCIA"
+            class="botao-cor"
+            [style.background-color]="obterCorCSS(cor)"
+            [title]="obterNomeCor(cor)"
+          >
+            {{ obterNomeCor(cor) }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="botoes-acao">
+        <button
+          (click)="fazerPalpite()"
+          [disabled]="carregando || jogoTerminado || coreSelecionadas.length !== TAMANHO_SEQUENCIA"
+          class="btn btn-primary btn-grande"
+        >
+          {{ carregando ? 'Processando...' : 'Enviar Palpite' }}
+        </button>
+
+        <button
+          (click)="limparSelecao()"
+          [disabled]="carregando || jogoTerminado || coreSelecionadas.length === 0"
+          class="btn btn-secondary"
+        >
+          Limpar
+        </button>
+      </div>
+
+      <!-- Botão Abandonar -->
+      <button
+        (click)="abandonarJogo()"
+        [disabled]="carregando"
+        class="btn btn-abandonar"
+        *ngIf="!jogoTerminado"
+      >
+        Abandonar Jogo
+      </button>
+    </div>
+  </div>
+
+  <!-- Tela Final -->
+  <div class="tela-final" *ngIf="jogoTerminado">
+    <div class="card-final">
+      <h2 *ngIf="jogadorVenceu" class="titulo-vitoria">🎉 Você Venceu! 🎉</h2>
+      <h2 *ngIf="!jogadorVenceu" class="titulo-derrota">Fim do Jogo</h2>
+
+      <div class="estatisticas-finais">
+        <div class="stat">
+          <span class="label">Tentativas Usadas:</span>
+          <span class="valor">{{ tentativas.length }}/{{ NUM_TENTATIVAS_MAX }}</span>
+        </div>
+
+        <div *ngIf="jogadorVenceu" class="stat">
+          <span class="label">Pontuação:</span>
+          <span class="valor">{{ (NUM_TENTATIVAS_MAX - tentativas.length + 1) * 100 }}</span>
+        </div>
+      </div>
+
+      <div class="botoes-finais">
+        <button (click)="iniciarNovoJogo()" class="btn btn-primary btn-grande">
+          Novo Jogo
+        </button>
+
+        <button (click)="router.navigate(['/rankings'])" class="btn btn-secondary">
+          Ver Ranking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

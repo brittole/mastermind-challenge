@@ -1,0 +1,23 @@
+# EditorConfig é útil para manter estilos de codificação consistentes
+# para múltiplos desenvolvedores trabalhando no mesmo projeto
+# através de vários editores e IDEs.
+# editorconfig.org
+
+root = true
+
+# Todas os arquivos
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Arquivos Markdown
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+# Arquivos JSON
+[*.json]
+indent_size = 2

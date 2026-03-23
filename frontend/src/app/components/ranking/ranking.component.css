@@ -1,0 +1,438 @@
+/* Estilos do Componente de Ranking */
+
+.ranking-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ranking-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.ranking-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitulo {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Botão Atualizar */
+.btn-atualizar {
+  display: block;
+  margin: 0 auto 2rem auto;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #667eea;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-atualizar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-atualizar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Alertas */
+.alerta {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alerta-erro {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+}
+
+/* Carregando */
+.carregando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.carregando p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Seção de Resumo */
+.secao-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.card-resumo {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-resumo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.numero-grande {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Seção de Ranking */
+.secao-ranking {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.secao-ranking h3 {
+  margin: 0 0 1.5rem 0;
+  color: #1F2937;
+  font-size: 1.5rem;
+}
+
+.sem-dados {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+  font-style: italic;
+}
+
+/* Wrapper para Responsividade */
+.tabela-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+}
+
+/* Tabela */
+.tabela-ranking {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cabecalho-tabela {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+}
+
+.cabecalho-tabela th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.coluna-posicao {
+  width: 100px;
+  text-align: center;
+}
+
+.coluna-nome {
+  min-width: 200px;
+}
+
+.coluna-numero {
+  width: 120px;
+  text-align: center;
+}
+
+/* Linhas */
+.linha-ranking {
+  border-bottom: 1px solid #E5E7EB;
+  transition: all 0.3s ease;
+}
+
+.linha-ranking:hover {
+  background: #F9FAFB;
+}
+
+.linha-ranking.top-3 {
+  background: #FFFBEB;
+}
+
+.linha-ranking.top-3:hover {
+  background: #FEF3C7;
+}
+
+.linha-ranking td {
+  padding: 1rem;
+  color: #374151;
+}
+
+/* Célula de Posição */
+.numero-posicao {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.medalha {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Célula de Nome */
+.nome-jogador {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.nome {
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.email {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-vitoria {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
+.badge-bom {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.badge-regular {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+/* Legenda */
+.legenda {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.item-legenda {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.item-legenda .badge {
+  flex-shrink: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .ranking-container {
+    padding: 1rem;
+  }
+
+  .ranking-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .coluna-numero {
+    width: 90px;
+    font-size: 0.9rem;
+  }
+
+  .cabecalho-tabela th,
+  .linha-ranking td {
+    padding: 0.75rem;
+  }
+
+  .nome-jogador {
+    gap: 0.5rem;
+  }
+
+  .avatar {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .nome {
+    font-size: 0.95rem;
+  }
+
+  .email {
+    display: none;
+  }
+
+  .secao-resumo {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .card-resumo {
+    padding: 1.5rem;
+  }
+
+  .numero-grande {
+    font-size: 2rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+  }
+
+  .legenda {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .ranking-container {
+    padding: 0.5rem;
+  }
+
+  .ranking-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .ranking-header {
+    margin-bottom: 1rem;
+  }
+
+  .secao-ranking {
+    padding: 1rem;
+  }
+
+  .secao-ranking h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .coluna-posicao {
+    width: 70px;
+  }
+
+  .coluna-numero {
+    width: 70px;
+    font-size: 0.85rem;
+  }
+
+  .numero-posicao {
+    display: none;
+  }
+
+  .medalha {
+    margin-right: 0;
+  }
+
+  .cabecalho-tabela th,
+  .linha-ranking td {
+    padding: 0.5rem;
+  }
+
+  .badge {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .secao-resumo {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .card-resumo {
+    padding: 1rem;
+  }
+
+  .numero-grande {
+    font-size: 1.5rem;
+  }
+}

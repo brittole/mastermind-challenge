@@ -1,0 +1,144 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Título -->
+    <h2 class="login-title">
+      {{ modo === 'login' ? 'Bem-vindo de volta!' : 'Crie sua conta' }}
+    </h2>
+
+    <!-- Mensagens -->
+    <div *ngIf="erro" class="alerta alerta-erro">
+      <strong>Erro:</strong> {{ erro }}
+    </div>
+
+    <div *ngIf="sucesso" class="alerta alerta-sucesso">
+      <strong>Sucesso:</strong> {{ sucesso }}
+    </div>
+
+    <!-- Formulário de Login -->
+    <form *ngIf="modo === 'login'" class="formulario">
+      <div class="grupo-formulario">
+        <label for="email-login">Email:</label>
+        <input
+          id="email-login"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="seu@email.com"
+          [disabled]="carregando"
+          class="input"
+          required
+        />
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="senha-login">Senha:</label>
+        <input
+          id="senha-login"
+          type="password"
+          [(ngModel)]="senha"
+          name="senha"
+          placeholder="••••••••"
+          [disabled]="carregando"
+          class="input"
+          required
+        />
+      </div>
+
+      <button
+        type="button"
+        (click)="fazerLogin()"
+        [disabled]="carregando"
+        class="btn btn-primary"
+      >
+        {{ carregando ? 'Entrando...' : 'Entrar' }}
+      </button>
+    </form>
+
+    <!-- Formulário de Registro -->
+    <form *ngIf="modo === 'register'" class="formulario">
+      <div class="grupo-formulario">
+        <label for="nome-registro">Nome:</label>
+        <input
+          id="nome-registro"
+          type="text"
+          [(ngModel)]="nome"
+          name="nome"
+          placeholder="Seu Nome Completo"
+          [disabled]="carregando"
+          class="input"
+          required
+        />
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="email-registro">Email:</label>
+        <input
+          id="email-registro"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="seu@email.com"
+          [disabled]="carregando"
+          class="input"
+          required
+        />
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="senha-registro">Senha:</label>
+        <input
+          id="senha-registro"
+          type="password"
+          [(ngModel)]="senha"
+          name="senha"
+          placeholder="••••••••"
+          [disabled]="carregando"
+          class="input"
+          required
+        />
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="confirmar-senha">Confirmar Senha:</label>
+        <input
+          id="confirmar-senha"
+          type="password"
+          [(ngModel)]="confirmarSenha"
+          name="confirmarSenha"
+          placeholder="••••••••"
+          [disabled]="carregando"
+          class="input"
+          required
+        />
+      </div>
+
+      <button
+        type="button"
+        (click)="fazerRegistro()"
+        [disabled]="carregando"
+        class="btn btn-primary"
+      >
+        {{ carregando ? 'Criando conta...' : 'Criar Conta' }}
+      </button>
+    </form>
+
+    <!-- Botão de Alternância -->
+    <div class="alternancia">
+      <p>
+        {{ modo === 'login' ? 'Não tem conta?' : 'Já tem conta?' }}
+        <button
+          type="button"
+          (click)="alternarModo()"
+          [disabled]="carregando"
+          class="btn-link"
+        >
+          {{ modo === 'login' ? 'Registre-se' : 'Faça login' }}
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <!-- Decoração de Fundo -->
+  <div class="decoracao decoracao-esquerda"></div>
+  <div class="decoracao decoracao-direita"></div>
+</div>

@@ -1,0 +1,138 @@
+<div class="ranking-container">
+  <!-- Cabeçalho -->
+  <div class="ranking-header">
+    <h2>🏆 Ranking Global</h2>
+    <p class="subtitulo">Veja os melhores jogadores do Mastermind</p>
+  </div>
+
+  <!-- Botão Atualizar -->
+  <button (click)="carregarRanking()" [disabled]="carregando" class="btn btn-atualizar">
+    {{ carregando ? 'Atualizando...' : '🔄 Atualizar' }}
+  </button>
+
+  <!-- Erro -->
+  <div *ngIf="erro" class="alerta alerta-erro">
+    <strong>Erro:</strong> {{ erro }}
+  </div>
+
+  <!-- Carregando -->
+  <div *ngIf="carregando" class="carregando">
+    <div class="spinner"></div>
+    <p>Carregando ranking...</p>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <div *ngIf="!carregando && dados">
+    <!-- Resumo de Estatísticas -->
+    <div class="secao-resumo">
+      <div class="card-resumo">
+        <div class="numero-grande">{{ formatarNumero(dados.total_players) }}</div>
+        <div class="label">Jogadores Ativos</div>
+      </div>
+
+      <div class="card-resumo">
+        <div class="numero-grande">{{ formatarNumero(dados.total_games_played) }}</div>
+        <div class="label">Jogos Jogados</div>
+      </div>
+
+      <div class="card-resumo">
+        <div class="numero-grande">{{ formatarNumero(dados.total_victories) }}</div>
+        <div class="label">Total de Vitórias</div>
+      </div>
+
+      <div class="card-resumo">
+        <div class="numero-grande">{{ dados.average_win_rate.toFixed(1) }}%</div>
+        <div class="label">Taxa Média de Vitória</div>
+      </div>
+    </div>
+
+    <!-- Tabela de Ranking -->
+    <div class="secao-ranking">
+      <h3>Top 100 Jogadores</h3>
+
+      <div *ngIf="jogadores.length === 0" class="sem-dados">
+        Ainda não há jogadores no ranking.
+      </div>
+
+      <div *ngIf="jogadores.length > 0" class="tabela-wrapper">
+        <table class="tabela-ranking">
+          <thead>
+            <tr class="cabecalho-tabela">
+              <th class="coluna-posicao">Posição</th>
+              <th class="coluna-nome">Jogador</th>
+              <th class="coluna-numero">Jogo</th>
+              <th class="coluna-numero">Vitórias</th>
+              <th class="coluna-numero">Taxa</th>
+              <th class="coluna-numero">Pontos</th>
+              <th class="coluna-numero">Média</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let jogador of jogadores; let i = index"
+              [ngClass]="obterClasseLinha(jogador, i)"
+            >
+              <td class="coluna-posicao">
+                <span class="medalha">{{ obterMedalha(obterPosicao(i)) }}</span>
+                <span class="numero-posicao">#{{ obterPosicao(i) }}</span>
+              </td>
+
+              <td class="coluna-nome">
+                <div class="nome-jogador">
+                  <div class="avatar">{{ jogador.username.charAt(0).toUpperCase() }}</div>
+                  <div>
+                    <div class="nome">{{ jogador.username }}</div>
+                    <div class="email">{{ jogador.email }}</div>
+                  </div>
+                </div>
+              </td>
+
+              <td class="coluna-numero">
+                {{ formatarNumero(jogador.total_games) }}
+              </td>
+
+              <td class="coluna-numero">
+                <span class="badge badge-vitoria">{{ jogador.games_won }}</span>
+              </td>
+
+              <td class="coluna-numero">
+                <span
+                  class="badge"
+                  [ngClass]="jogador.win_rate >= 50 ? 'badge-bom' : 'badge-regular'"
+                >
+                  {{ (jogador.win_rate * 100).toFixed(0) }}%
+                </span>
+              </td>
+
+              <td class="coluna-numero">
+                {{ formatarNumero(jogador.best_score) }}
+              </td>
+
+              <td class="coluna-numero">
+                {{ formatarNumero(Math.round(jogador.average_score)) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Legenda -->
+    <div class="legenda">
+      <div class="item-legenda">
+        <span class="badge badge-vitoria">Vitórias</span>
+        <span>Número total de vitórias</span>
+      </div>
+
+      <div class="item-legenda">
+        <span class="badge badge-bom">Taxa Alta</span>
+        <span>Taxa de vitória ≥ 50%</span>
+      </div>
+
+      <div class="item-legenda">
+        <span class="badge badge-regular">Taxa Regular</span>
+        <span>Taxa de vitória < 50%</span>
+      </div>
+    </div>
+  </div>
+</div>
