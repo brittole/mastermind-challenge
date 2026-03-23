@@ -45,6 +45,7 @@ export class ApiService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/register`, data).pipe(
       tap(response => {
         localStorage.setItem('authToken', response.access_token);
+        localStorage.setItem('currentUser', JSON.stringify(response.user));
         this.currentUserSubject.next(response.user);
       })
     );
@@ -57,6 +58,7 @@ export class ApiService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, data).pipe(
       tap(response => {
         localStorage.setItem('authToken', response.access_token);
+        localStorage.setItem('currentUser', JSON.stringify(response.user));
         this.currentUserSubject.next(response.user);
       })
     );
@@ -76,7 +78,6 @@ export class ApiService {
   private loadCurrentUser(): void {
     const token = this.getToken();
     if (token) {
-      // Em produção, você deveria validar o token no backend
       const userStr = localStorage.getItem('currentUser');
       if (userStr) {
         this.currentUserSubject.next(JSON.parse(userStr));

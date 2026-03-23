@@ -4,11 +4,11 @@
   <nav class="navbar">
     <div class="navbar-content">
       <div class="navbar-brand" (click)="goHome()">
-        <h1>🔴🔵🟢🟡 {{ title }}</h1>
+        <h1>{{ title }}</h1>
       </div>
 
       <div class="navbar-menu" *ngIf="currentUser">
-        <button class="nav-btn" (click)="goRankings()">🏆 Classificações</button>
+        <button class="nav-btn" (click)="goRankings()">Classificações</button>
         <span class="user-name">Olá, {{ currentUser.username }}!</span>
         <button class="nav-btn logout-btn" (click)="logout()">Sair</button>
       </div>

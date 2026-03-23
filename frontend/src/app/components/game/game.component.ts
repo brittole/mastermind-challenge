@@ -211,7 +211,7 @@ export class GameComponent implements OnInit {
         if (tentativa.correct_positions === this.TAMANHO_SEQUENCIA) {
           this.jogoTerminado = true;
           this.jogadorVenceu = true;
-          this.mensagem = `🎉 Parabéns! Você acertou em ${this.tentativas.length} ${this.tentativas.length === 1 ? 'tentativa' : 'tentativas'}!`;
+          this.mensagem = `Parabéns! Você acertou em ${this.tentativas.length} ${this.tentativas.length === 1 ? 'tentativa' : 'tentativas'}!`;
         } else if (this.tentativas.length >= this.NUM_TENTATIVAS_MAX) {
           this.jogoTerminado = true;
           this.jogadorVenceu = false;

@@ -236,8 +236,12 @@ class GameService:
             raise ValueError(f"Não é possível abandonar um jogo {game.status}")
         
         # Calcular pontuação para jogo abandonado
-        duration = (datetime.utcnow() - game.started_at).total_seconds()
-        score = self.mastermind.calculate_score(game.attempts_count + 1, duration)
+        # Se não fez nem uma tentativa, score = 0
+        if game.attempts_count == 0:
+            score = 0
+        else:
+            duration = (datetime.utcnow() - game.started_at).total_seconds()
+            score = self.mastermind.calculate_score(game.attempts_count, duration)
         
         return GameRepository.end_game(db, game_id, "lost", score)
     

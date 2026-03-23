@@ -78,19 +78,7 @@ def debug_reveal_secret(
     db: Session = Depends(get_db)
 ) -> dict:
     """
-    [APENAS PARA TESTES] Revelar o código secreto de um jogo ativo.
-    
-    Este endpoint é apenas para testes e debug. Em produção, ele não deveria existir.
-    
-    Args:
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        dict: {"secret_code": [cor1, cor2, cor3, cor4]}
-        
-    Raises:
-        HTTPException 404: Se não houver jogo ativo
+    Revelar o código secreto de um jogo ativo (endpoint de debug).
     """
     try:
         from app.repositories.repositories import GameRepository
@@ -103,7 +91,7 @@ def debug_reveal_secret(
         return {
             "game_id": game.id,
             "secret_code": game.secret_code,
-            "status": "🔓 REVELADO PARA TESTES"
+            "status": "revealed"
         }
     except HTTPException:
         raise

@@ -1,22 +1,22 @@
-# 🎮 Mastermind Game - Backend API
+# Mastermind Game - Backend API
 
 Implementação de uma API REST completa para o clássico jogo **Mastermind** (quebra-cabeça de cores). O usuário tem 10 tentativas para adivinhar uma sequência de 4 cores.
 
-## 📋 Visão Geral
+## Visão Geral
 
 Este projeto implementa o **backend** de um jogo Mastermind com:
 
-✅ **Arquitetura em camadas** (Controllers → Services → Repositories)  
-✅ **Autenticação JWT** segura  
-✅ **Banco de dados PostgreSQL** com ORM SQLAlchemy  
-✅ **Testes unitários** com pytest (cobertura completa)  
-✅ **API Documentation** automática com Swagger/OpenAPI  
-✅ **Deploy-ready** com Docker e docker-compose  
-✅ **Lógica sólida** e bem testada  
+- **Arquitetura em camadas** (Controllers → Services → Repositories)
+- **Autenticação JWT** segura
+- **Banco de dados PostgreSQL** com ORM SQLAlchemy
+- **Testes unitários** com pytest (cobertura completa)
+- **API Documentation** automática com Swagger/OpenAPI
+- **Deploy-ready** com Docker e docker-compose
+- **Lógica sólida** e bem testada
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 | Camada | Tecnologia |
 |--------|-----------|
@@ -31,7 +31,7 @@ Este projeto implementa o **backend** de um jogo Mastermind com:
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 backend/
@@ -41,24 +41,24 @@ backend/
 │   ├── config.py                  # Configurações (env vars)
 │   ├── dependencies.py            # Injeção de dependências (JWT, DB)
 │   │
-│   ├── api/                       # 🎮 CONTROLLERS (API Routes)
+│   ├── api/                       # CONTROLLERS (API Routes)
 │   │   ├── auth.py               # POST /register, /login
 │   │   ├── games.py              # POST /start, /attempt, GET /games
 │   │   └── rankings.py           # GET /rankings
 │   │
-│   ├── services/                 # 💼 SERVICES (Business Logic)
+│   ├── services/                 # SERVICES (Business Logic)
 │   │   └── services.py           # AuthService, GameService, RankingService
 │   │
-│   ├── repositories/             # 💾 REPOSITORIES (Data Access)
+│   ├── repositories/             # REPOSITORIES (Data Access)
 │   │   └── repositories.py       # UserRepository, GameRepository, AttemptRepository
 │   │
-│   ├── models/                   # 🗄️ MODELS (Database)
+│   ├── models/                   # MODELS (Database)
 │   │   └── database.py           # User, Game, Attempt (SQLAlchemy)
 │   │
-│   ├── schemas/                  # 📝 SCHEMAS (Request/Response Validation)
+│   ├── schemas/                  # SCHEMAS (Request/Response Validation)
 │   │   └── schemas.py            # Pydantic models for API
 │   │
-│   └── utils/                    # 🔧 UTILITIES
+│   └── utils/                    # UTILITIES
 │       └── mastermind.py         # Lógica core do jogo
 │
 ├── tests/
@@ -78,39 +78,39 @@ backend/
 
 ---
 
-## 🎯 Arquitetura em Camadas
+## Arquitetura em Camadas
 
 ```
 REQUEST → API Layer (Controllers) → Service Layer → Repository Layer → Database
 RESPONSE ← API Layer (Controllers) ← Service Layer ← Repository Layer ← Database
 ```
 
-### **Camada 1: API (Controllers)** 📡
+### **Camada 1: API (Controllers)**
 - Responsáveis por HTTP (receber requests, retornar responses)
 - Validação de entrada com Pydantic
 - Autenticação JWT
 - **Arquivos**: `api/auth.py`, `api/games.py`, `api/rankings.py`
 
-### **Camada 2: Services** 💼
+### **Camada 2: Services**
 - Lógica de negócio complexa
 - Orquestração de múltiplos repositories
 - Validações de regras de negócio
 - **Arquivo**: `services/services.py`
 
-### **Camada 3: Repositories** 💾
+### **Camada 3: Repositories**
 - Acesso direto ao banco de dados
 - Operações CRUD simples
 - Queries otimizadas
 - **Arquivo**: `repositories/repositories.py`
 
-### **Camada 4: Models** 🗄️
+### **Camada 4: Models**
 - Definição de tabelas do banco
 - Relacionamentos entre entidades
 - **Arquivo**: `models/database.py`
 
 ---
 
-## 🚀 Como Rodar Localmente
+## Como Rodar Localmente
 
 ### **Pré-requisitos**
 
@@ -125,14 +125,14 @@ python --version        # Python 3.11+
 psql --version         # PostgreSQL 14+
 ```
 
-### **1️⃣ Clonar o repositório**
+### **1. Clonar o repositório**
 
 ```bash
 git clone https://github.com/seu-usuario/mastermind-challenge.git
 cd mastermind-challenge/backend
 ```
 
-### **2️⃣ Criar variáveis de ambiente**
+### **2. Criar variáveis de ambiente**
 
 Copie o arquivo `.env.example` para `.env`:
 
@@ -157,7 +157,7 @@ HOST=0.0.0.0
 PORT=8000
 ```
 
-### **3️⃣ Criar banco de dados PostgreSQL**
+### **3. Criar banco de dados PostgreSQL**
 
 ```bash
 psql -U postgres
@@ -168,7 +168,7 @@ CREATE DATABASE mastermind_db;
 \q
 ```
 
-### **4️⃣ Criar ambiente virtual (venv)**
+### **4. Criar ambiente virtual (venv)**
 
 ```bash
 python -m venv venv
@@ -180,13 +180,13 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### **5️⃣ Instalar dependências**
+### **5. Instalar dependências**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### **6️⃣ Rodar a aplicação**
+### **6. Rodar a aplicação**
 
 ```bash
 python -m uvicorn app.main:app --reload
@@ -200,7 +200,7 @@ Acesse:
 
 ---
 
-## 🧪 Executar Testes
+## Executar Testes
 
 ```bash
 # Todos os testes
@@ -223,7 +223,7 @@ pytest tests/test_api.py -v
 
 ---
 
-## 🐳 Rodar com Docker Compose
+## Rodar com Docker Compose
 
 ### **Pré-requisitos**
 - Docker
@@ -252,11 +252,11 @@ Acesse: http://localhost:8000/api/docs
 
 ---
 
-## 📚 API Endpoints
+## API Endpoints
 
 Base URL: `http://localhost:8000/api`
 
-### **🔐 Autenticação**
+### **Autenticação**
 
 #### Registrar novo usuário
 ```http
@@ -300,7 +300,7 @@ Response: 200 OK
 }
 ```
 
-### **🎮 Jogos**
+### **Jogos**
 
 #### Iniciar novo jogo
 ```http
@@ -368,7 +368,7 @@ GET /games
 Authorization: Bearer {access_token}
 ```
 
-### **🏆 Rankings**
+### **Rankings**
 
 #### Obter ranking global
 ```http
@@ -382,7 +382,7 @@ GET /rankings/user/{user_id}
 
 ---
 
-## 🎮 Regras do Jogo
+## Regras do Jogo
 
 1. **Objetivo**: Adivinhar uma sequência de 4 cores em no máximo 10 tentativas
 2. **Cores disponíveis**: red, blue, green, yellow, white, black
@@ -392,7 +392,7 @@ GET /rankings/user/{user_id}
 
 ---
 
-## 🔐 Segurança
+## Segurança
 
 - **Hashing**: bcrypt (passlib)
 - **Autenticação**: JWT com HS256
@@ -401,7 +401,7 @@ GET /rankings/user/{user_id}
 
 ---
 
-## 🚀 Deploy em Produção
+## Deploy em Produção
 
 ### **Docker**
 ```bash
@@ -418,7 +418,7 @@ DEBUG=false
 
 ---
 
-## 📝 Decisões Técnicas
+## Decisões Técnicas
 
 - **FastAPI**: Moderno, rápido, documentação automática Swagger
 - **SQLAlchemy**: ORM maduro, prevenção SQL injection
@@ -427,4 +427,4 @@ DEBUG=false
 
 ---
 
-**Desenvolvido com ❤️ para processo seletivo Jr Full-Stack** 
+**Desenvolvido para processo seletivo Jr Full-Stack**

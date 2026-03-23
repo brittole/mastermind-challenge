@@ -1,23 +1,23 @@
-# 🎮 Mastermind - Frontend Angular
+# Mastermind - Frontend Angular
 
 Frontend em Angular 17 para o jogo Mastermind, uma aplicação de dedução lógica onde o jogador tenta adivinhar uma sequência de cores em até 10 tentativas.
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
-- ✅ **Autenticação**: Registro e login de usuários
-- ✅ **Jogo Interativo**: Tabuleiro de jogo com seleção de cores
-- ✅ **Ranking Global**: Visualização de jogadores e estatísticas
-- ✅ **Interface Responsiva**: Funciona em desktop, tablet e móvel
-- ✅ **Tema Moderno**: Design com gradiente e animações suaves
-- ✅ **Português**: Interface completamente em português
+- **Autenticação**: Registro e login de usuários
+- **Jogo Interativo**: Tabuleiro de jogo com seleção de cores
+- **Ranking Global**: Visualização de jogadores e estatísticas
+- **Interface Responsiva**: Funciona em desktop, tablet e móvel
+- **Tema Moderno**: Design com gradiente e animações suaves
+- **Português**: Interface completamente em português
 
-## 🛠️ Requisitos
+## Requisitos
 
 - **Node.js**: v18.0.0 ou superior
 - **npm**: v9.0.0 ou superior
 - **Angular CLI**: v17.0.0 ou superior
 
-## 📦 Instalação
+## Instalação
 
 ### 1. Instalar dependências
 
@@ -36,7 +36,7 @@ export const environment = {
 };
 ```
 
-## 🏃 Executar Localmente
+## Executar Localmente
 
 ### Modo de Desenvolvimento
 
@@ -54,7 +54,7 @@ Acesse a aplicação em `http://localhost:4200`
 ng serve --configuration production
 ```
 
-## 🏗️ Build
+## Build
 
 ### Build para Produção
 
@@ -64,7 +64,7 @@ ng build --configuration production
 
 Os arquivos compilados estarão em `dist/mastermind-frontend/`
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 src/
@@ -91,7 +91,7 @@ src/
 └── index.html                  # HTML raiz
 ```
 
-## 🎯 Componentes
+## Componentes
 
 ### LoginComponent
 - Formulário de registro
@@ -111,7 +111,7 @@ src/
 - Taxa de vitória por jogador
 - Pontuação média
 
-## 🔐 Autenticação
+## Autenticação
 
 A autenticação é gerenciada pelo `ApiService` que:
 - Armazena o token JWT em `localStorage`
@@ -119,7 +119,7 @@ A autenticação é gerenciada pelo `ApiService` que:
 - Protege rotas com `AuthGuard`
 - Redireciona para login se não autenticado
 
-## 🎨 Temas e Cores
+## Temas e Cores
 
 ```css
 --primary-color: #667eea
@@ -130,21 +130,21 @@ A autenticação é gerenciada pelo `ApiService` que:
 --light-color: #F9FAFB
 ```
 
-## 📱 Responsividade
+## Responsividade
 
 A aplicação adapta-se automaticamente para:
 - **Desktop**: Layout completo com 2 painéis
 - **Tablet**: Layout ajustado (768px)
 - **Mobile**: Layout em coluna única (480px)
 
-## 🧪 Testes (Futuro)
+## Testes (Futuro)
 
 ```bash
 ng test              # Testes unitários
 ng e2e              # Testes e2e
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Render.com (Recomendado)
 
@@ -176,7 +176,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-## 🔗 Integração com Backend
+## Integração com Backend
 
 O frontend se conecta ao backend FastAPI através da `ApiService`:
 
@@ -192,7 +192,7 @@ Endpoints principais:
 - `GET /rankings` - Ranking global
 - `GET /users/{id}/stats` - Estatísticas do usuário
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Erro de conexão com backend
 - Verifique se o backend está rodando
@@ -212,16 +212,16 @@ npm install
 ng build
 ```
 
-## 📚 Documentação
+## Documentação
 
 - [Angular Docs](https://angular.io)
 - [TypeScript Docs](https://www.typescriptlang.org)
 - [RxJS Docs](https://rxjs.dev)
 
-## 👤 Autor
+## Autor
 
-Desenvolvido com ❤️ para o desafio Mastermind
+Desenvolvido para o desafio Mastermind
 
-## 📄 Licença
+## Licença
 
 Este projeto está sob licença MIT.

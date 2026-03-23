@@ -221,4 +221,4 @@ if __name__ == "__main__":
     print(f"Teste 4 (Duplicatas): posições={pos}, cores={col}")
     assert pos == 1, "Deve lidar com duplicatas corretamente"
     
-    print("\\nTodos os testes passaram! ✅")
+    print("\nTodos os testes passaram!")
