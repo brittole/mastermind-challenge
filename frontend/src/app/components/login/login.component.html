@@ -1,8 +1,18 @@
 <div class="login-container">
+  <img src="../../assets/alien.png" alt="Alien" title="Alien" class="et-alien" />
   <div class="login-card">
+    <!-- Texto de Missão -->
+    <div class="missao-container-card">
+      <h1 class="missao-titulo-card">BEM-VINDO, TERRÁQUEO!</h1>
+      <p class="missao-texto-card">
+        Combine as cores planetárias e garanta sua viagem de volta.<br/>
+        A sobrevivência depende da sua lógica.
+      </p>
+    </div>
+
     <!-- Título -->
-    <h2 class="login-title">
-      {{ modo === 'login' ? 'Bem-vindo de volta!' : 'Crie sua conta' }}
+    <h2 class="login-title" *ngIf="modo === 'register'">
+      Crie sua conta
     </h2>
 
     <!-- Mensagens -->

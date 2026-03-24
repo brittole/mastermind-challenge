@@ -1,13 +1,24 @@
 <!-- Mastermind - Aplicação Principal -->
 <div class="app-container">
   <!-- Cabeçalho/Navbar -->
-  <nav class="navbar">
-    <div class="navbar-content">
-      <div class="navbar-brand" (click)="goHome()">
+  <nav class="navbar" [class.navbar-login]="isLoginPage">
+    <div class="navbar-content" [class.navbar-content-login]="isLoginPage">
+      <div class="navbar-brand" (click)="goHome()" *ngIf="!isLoginPage">
+        <div class="brand-container">
+          <div class="billiard-balls">
+            <div class="ball ball-red"></div>
+            <div class="ball ball-yellow"></div>
+            <div class="ball ball-blue"></div>
+          </div>
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+
+      <div class="navbar-brand-login" *ngIf="isLoginPage">
         <h1>{{ title }}</h1>
       </div>
 
-      <div class="navbar-menu" *ngIf="currentUser">
+      <div class="navbar-menu" *ngIf="currentUser && !isLoginPage">
         <button class="nav-btn" (click)="goRankings()">Classificações</button>
         <span class="user-name">Olá, {{ currentUser.username }}!</span>
         <button class="nav-btn logout-btn" (click)="logout()">Sair</button>
@@ -22,6 +33,6 @@
 
   <!-- Rodapé -->
   <footer class="footer">
-    <p>Mastermind Challenge - Desenvolvido para demonstrar habilidades em Full Stack</p>
+    <p>Mastermind Challenge - Desenvolvido para demonstrar habilidades em Full Stack Jr</p>
   </footer>
 </div>

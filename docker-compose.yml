@@ -5,15 +5,15 @@ services:
   postgres:
     image: postgres:15-alpine
     environment:
-      POSTGRES_USER: mastermind
-      POSTGRES_PASSWORD: mastermind_password
-      POSTGRES_DB: mastermind_db
+      POSTGRES_USER: ${POSTGRES_USER:-mastermind}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mastermind_password}
+      POSTGRES_DB: ${POSTGRES_DB:-mastermind_db}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U mastermind"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mastermind}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -22,8 +22,8 @@ services:
   backend:
     build: ./backend
     environment:
-      DATABASE_URL: postgresql://mastermind:mastermind_password@postgres:5432/mastermind_db
-      SECRET_KEY: ${SECRET_KEY:-your-secret-key-here}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-mastermind}:${POSTGRES_PASSWORD:-mastermind_password}@postgres:5432/${POSTGRES_DB:-mastermind_db}
+      SECRET_KEY: ${SECRET_KEY:-change-this-secret-key}
       DEBUG: false
       HOST: 0.0.0.0
       PORT: 8000

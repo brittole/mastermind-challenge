@@ -13,9 +13,10 @@ import { User } from './models/mastermind.models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Mastermind - Quebra-Código';
+  title = 'Mastermind';
   currentUser: User | null = null;
   isLoading = false;
+  isLoginPage = false;
 
   constructor(
     private apiService: ApiService,
@@ -32,6 +33,11 @@ export class AppComponent implements OnInit {
     if (this.apiService.isAuthenticated()) {
       this.currentUser = this.apiService.getCurrentUser();
     }
+
+    // Detectar se está na página de login
+    this.router.events.subscribe(() => {
+      this.isLoginPage = this.router.url.includes('/login') || this.router.url.includes('/register');
+    });
   }
 
   /**

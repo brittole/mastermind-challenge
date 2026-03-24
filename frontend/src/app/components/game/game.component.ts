@@ -217,7 +217,7 @@ export class GameComponent implements OnInit {
           this.jogadorVenceu = false;
           this.obterRespostaCorreta();
         } else {
-          this.mensagem = `Tentativa ${this.tentativas.length}: ${tentativa.correct_positions} acertos e ${tentativa.correct_colors} posições corretas.`;
+          this.mensagem = `Tentativa ${this.tentativas.length}: ${tentativa.correct_positions} posições corretas e ${tentativa.correct_colors} cores corretas.`;
         }
       },
       error: () => {
@@ -274,12 +274,12 @@ export class GameComponent implements OnInit {
    */
   obterNomeCor(cor: string): string {
     const mapa: { [key: string]: string } = {
-      'vermelho': 'Vermelho',
-      'azul': 'Azul',
-      'verde': 'Verde',
-      'amarelo': 'Amarelo',
-      'roxo': 'Roxo',
-      'laranja': 'Laranja'
+      'red': 'Vermelho',
+      'blue': 'Azul',
+      'green': 'Verde',
+      'yellow': 'Amarelo',
+      'white': 'Branco',
+      'black': 'Preto'
     };
     return mapa[cor] || cor;
   }

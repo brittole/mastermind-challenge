@@ -15,7 +15,6 @@ try:
     import psycopg2
     
     settings = get_settings()
-    print(f"[*] DATABASE_URL: {settings.database_url}")
     print("[*] Conectando ao PostgreSQL...")
     
     # Extrair credenciais da DATABASE_URL
@@ -35,7 +34,7 @@ try:
         print("[ERRO] DATABASE_URL deve estar em formato postgresql://")
         sys.exit(1)
     
-    print(f"[*] User: {user}, Host: {host}, DB: {database}")
+    print(f"[*] Host: {host}, DB: {database}")
     
     conn = psycopg2.connect(
         user=user,

@@ -9,20 +9,25 @@
 .ranking-header {
   text-align: center;
   margin-bottom: 2rem;
-  color: white;
+  color: #ffffff;
+  background: #0b6623;
+  padding: 2rem;
+  border-radius: 12px;
 }
 
 .ranking-header h2 {
   margin: 0 0 0.5rem 0;
   font-size: 2.5rem;
-  color: #c9a84c;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-shadow: none;
+  font-family: 'Michroma', sans-serif;
 }
 
 .subtitulo {
   margin: 0;
   font-size: 1.1rem;
-  opacity: 0.9;
+  opacity: 1;
+  color: #ffffff;
 }
 
 /* Botão Atualizar */
@@ -30,9 +35,9 @@
   display: block;
   margin: 0 auto 2rem auto;
   padding: 0.75rem 1.5rem;
-  background: transparent;
-  color: #c9a84c;
-  border: 1px solid #c9a84c;
+  background: #0b6623;
+  color: #ffffff;
+  border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -40,10 +45,10 @@
 }
 
 .btn-atualizar:hover:not(:disabled) {
-  background: #c9a84c;
-  color: #111;
+  background: #094d1a;
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(201, 168, 76, 0.3);
+  box-shadow: 0 6px 12px rgba(11, 102, 35, 0.3);
 }
 
 .btn-atualizar:disabled {
@@ -83,14 +88,14 @@
   align-items: center;
   justify-content: center;
   padding: 3rem;
-  color: white;
+  color: #333;
 }
 
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid white;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #333;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 1rem;
@@ -116,55 +121,55 @@
 }
 
 .card-resumo {
-  background: #252525;
+  background: #d0f0d0;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #b0e0b0;
 }
 
 .card-resumo:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
-  border-color: #c9a84c;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  border-color: #333;
 }
 
 .numero-grande {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #c9a84c;
+  color: #333;
   margin-bottom: 0.5rem;
 }
 
 .label {
   font-size: 0.95rem;
-  color: #999;
+  color: #666;
   font-weight: 600;
   text-transform: uppercase;
 }
 
 /* Seção de Ranking */
 .secao-ranking {
-  background: #252525;
+  background: #ffffff;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #e0e0e0;
 }
 
 .secao-ranking h3 {
   margin: 0 0 1.5rem 0;
-  color: #c9a84c;
+  color: #333;
   font-size: 1.5rem;
 }
 
 .sem-dados {
   text-align: center;
   padding: 3rem;
-  color: #999;
+  color: #666;
   font-style: italic;
 }
 
@@ -172,7 +177,7 @@
 .tabela-wrapper {
   overflow-x: auto;
   border-radius: 8px;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #e0e0e0;
 }
 
 /* Tabela */
@@ -182,8 +187,8 @@
 }
 
 .cabecalho-tabela {
-  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
-  color: #c9a84c;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  color: #333;
   font-weight: 600;
 }
 
@@ -210,31 +215,31 @@
 
 /* Linhas */
 .linha-ranking {
-  border-bottom: 1px solid #3a3a3a;
+  border-bottom: 1px solid #e0e0e0;
   transition: all 0.3s ease;
 }
 
 .linha-ranking:hover {
-  background: #2a2a2a;
+  background: #f5f5f5;
 }
 
 .linha-ranking.top-3 {
-  background: #2a2510;
+  background: #fffde7;
 }
 
 .linha-ranking.top-3:hover {
-  background: #3a3218;
+  background: #fff9c4;
 }
 
 .linha-ranking td {
   padding: 1rem;
-  color: #ddd;
+  color: #333;
 }
 
 /* Célula de Posição */
 .numero-posicao {
   font-weight: 600;
-  color: #c9a84c;
+  color: #333;
 }
 
 .medalha {
@@ -252,24 +257,24 @@
 .avatar {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #c9a84c 0%, #a07e2e 100%);
+  background: linear-gradient(135deg, #555 0%, #333 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #111;
+  color: #fff;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .nome {
   font-weight: 600;
-  color: #eee;
+  color: #333;
 }
 
 .email {
   font-size: 0.85rem;
-  color: #777;
+  color: #888;
 }
 
 /* Badges */
@@ -299,14 +304,14 @@
 
 /* Legenda */
 .legenda {
-  background: #252525;
+  background: #ffffff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #e0e0e0;
 }
 
 .item-legenda {
@@ -314,7 +319,7 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 0.95rem;
-  color: #999;
+  color: #666;
 }
 
 .item-legenda .badge {

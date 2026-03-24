@@ -89,26 +89,30 @@
 
     <!-- Painel Direito: Seleção de Cores -->
     <div class="painel-selecao">
-      <h3>Seu Palpite</h3>
+      <h3>Descubra a combinação correta!</h3>
 
-      <!-- Seleção Atual -->
-      <div class="area-selecao-atual">
-        <div class="titulo-area">Sequência Selecionada</div>
-        <div class="sequencia-selecionada">
-          <div
-            *ngFor="let cor of coreSelecionadas; let i = index"
-            class="circulo-selecionado"
-            [style.background-color]="obterCorCSS(cor)"
-            (click)="removerUltimaCor()"
-            title="Clique para remover"
-          >
-            <span class="numero">{{ i + 1 }}</span>
+      <!-- Seleção Atual - Astronauta -->
+      <div class="area-selecao-atual astronauta-container">
+        <img src="assets/astronauta.png" alt="Astronauta" title="Astronauta" class="imagem-astronauta" />
+        <div class="visor-selecao">
+          <div class="sequencia-selecionada">
+            <div
+              *ngFor="let cor of coreSelecionadas; let i = index"
+              class="circulo-selecionado"
+              [style.background-color]="obterCorCSS(cor)"
+              (click)="removerUltimaCor()"
+              title="Clique para remover"
+            >
+              <span class="numero">{{ i + 1 }}</span>
+            </div>
+
+            <div
+              *ngFor="let _ of [].constructor(TAMANHO_SEQUENCIA - coreSelecionadas.length)"
+              class="circulo-vazio"
+            >
+              <img src="assets/lua.png" alt="Lua" title="Lua" class="imagem-lua" />
+            </div>
           </div>
-
-          <div
-            *ngFor="let _ of [].constructor(TAMANHO_SEQUENCIA - coreSelecionadas.length)"
-            class="circulo-vazio"
-          ></div>
         </div>
       </div>
 
@@ -121,6 +125,7 @@
             (click)="adicionarCor(cor)"
             [disabled]="carregando || jogoTerminado || coreSelecionadas.length >= TAMANHO_SEQUENCIA"
             class="botao-cor"
+            [ngClass]="{'botao-cor-branco': cor === 'white'}"
             [style.background-color]="obterCorCSS(cor)"
             [title]="obterNomeCor(cor)"
           >
@@ -163,7 +168,7 @@
   <!-- Tela Final -->
   <div class="tela-final" *ngIf="jogoTerminado">
     <div class="card-final">
-      <h2 *ngIf="jogadorVenceu" class="titulo-vitoria">Você Venceu!</h2>
+      <h2 *ngIf="jogadorVenceu" class="titulo-vitoria">Você Venceu! Pode voltar para casa</h2>
       <h2 *ngIf="!jogadorVenceu" class="titulo-derrota">Fim do Jogo</h2>
 
       <div class="estatisticas-finais">

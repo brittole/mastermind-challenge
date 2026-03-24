@@ -2,8 +2,8 @@
 
 /* Reset e Variáveis CSS */
 :root {
-  --primary-color: #c9a84c;
-  --secondary-color: #a07e2e;
+  --primary-color: #ffffff;
+  --secondary-color: #dddddd;
   --success-color: #22C55E;
   --warning-color: #FBBF24;
   --danger-color: #EF4444;
@@ -37,14 +37,16 @@ body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   color: var(--text-color);
-  background-color: #1a1a1a;
-  background-image:
-    linear-gradient(45deg, #222 25%, transparent 25%),
-    linear-gradient(-45deg, #222 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #222 75%),
-    linear-gradient(-45deg, transparent 75%, #222 75%);
-  background-size: 40px 40px;
-  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  background-color: #000;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 60px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 50px 50px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 10px, #eee, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  background-attachment: fixed;
   min-height: 100vh;
   line-height: 1.6;
 }
@@ -66,7 +68,7 @@ a {
 }
 
 a:hover {
-  color: #dfc06a;
+  color: #dddddd;
 }
 
 /* Inputs e Form */
@@ -106,12 +108,12 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(201, 168, 76, 0.4);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(201, 168, 76, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Container */

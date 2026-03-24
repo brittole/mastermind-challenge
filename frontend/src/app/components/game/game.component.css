@@ -4,6 +4,11 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background: #000000 !important;
+  background-image: none !important;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .alerta {
@@ -46,17 +51,19 @@
 
 /* Painel de Tentativas */
 .painel-tentativas {
-  background: #252525;
+  background: #298329;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  border: 1px solid #3a3a3a;
+  box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
+  border: 1px solid #00cc00;
 }
 
 .painel-tentativas h3 {
   margin: 0 0 1rem 0;
-  color: #c9a84c;
+  color: #000;
   font-size: 1.3rem;
+  text-align: center;
+  font-family: 'Michroma', sans-serif;
 }
 
 .sem-tentativas {
@@ -102,13 +109,13 @@
 }
 
 .card-tentativa:hover {
-  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.1);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
   background: #222;
 }
 
 .numero-tentativa {
   font-weight: 600;
-  color: #c9a84c;
+  color: #ffffff;
   font-size: 0.85rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
@@ -154,7 +161,7 @@
 .feedback-item .valor {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #c9a84c;
+  color: #ffffff;
 }
 
 .progresso-tentativas {
@@ -173,7 +180,7 @@
 
 .progressbar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #c9a84c, #dfc06a);
+  background: linear-gradient(90deg, #ffffff, #dddddd);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -187,20 +194,22 @@
 
 /* Painel de Seleção */
 .painel-selecao {
-  background: #252525;
+  background: #000000;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #00ff00;
 }
 
 .painel-selecao h3 {
   margin: 0;
-  color: #c9a84c;
+  color: #ffffff;
   font-size: 1.3rem;
+  text-align: center;
+  font-family: 'Michroma', sans-serif;
 }
 
 .titulo-area {
@@ -217,6 +226,39 @@
   padding: 1rem;
   border-radius: 8px;
   border: 2px dashed #3a3a3a;
+}
+
+.astronauta-container {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  overflow: visible;
+}
+
+.imagem-astronauta {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  z-index: 20;
+}
+
+.visor-selecao {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 }
 
 .sequencia-selecionada {
@@ -256,16 +298,27 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #1a1a1a;
-  border: 3px dashed #3a3a3a;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.imagem-lua {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 /* Seletor de Cores */
 .seletor-cores {
-  background: #1a1a1a;
+  background: #000000;
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #333;
 }
 
 .grades-cores {
@@ -297,6 +350,16 @@
   cursor: not-allowed;
 }
 
+.botao-cor-branco {
+  color: #000000 !important;
+  border-color: #999 !important;
+  text-shadow: none !important;
+}
+
+.botao-cor-branco:hover:not(:disabled) {
+  border-color: #666 !important;
+}
+
 /* Botões de Ação */
 .botoes-acao {
   display: flex;
@@ -315,14 +378,14 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #c9a84c 0%, #a07e2e 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #dddddd 100%);
   color: #111;
   font-weight: 700;
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(201, 168, 76, 0.3);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:disabled {
@@ -412,7 +475,7 @@
 }
 
 .titulo-vitoria {
-  color: #c9a84c;
+  color: #ffffff;
   font-size: 2rem;
   margin: 0 0 1.5rem 0;
 }
@@ -448,7 +511,7 @@
 
 .stat .valor {
   font-size: 1.5rem;
-  color: #c9a84c;
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -497,7 +560,7 @@
 
 .modal-content h2 {
   margin: 0 0 1rem 0;
-  color: #c9a84c;
+  color: #ffffff;
   font-size: 1.5rem;
 }
 
@@ -521,7 +584,7 @@
 }
 
 .info-jogo-anterior strong {
-  color: #c9a84c;
+  color: #ffffff;
 }
 
 .botoes-conflito {

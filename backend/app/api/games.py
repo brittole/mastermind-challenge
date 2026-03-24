@@ -67,41 +67,6 @@ def get_active_game(
         )
 
 
-@router.get(
-    "/active/debug/secret",
-    response_model=dict,
-    summary="[DEBUG] Revelar código secreto do jogo ativo",
-    description="APENAS PARA TESTES - Revela o código secreto do jogo ativo do usuário"
-)
-def debug_reveal_secret(
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
-) -> dict:
-    """
-    Revelar o código secreto de um jogo ativo (endpoint de debug).
-    """
-    try:
-        from app.repositories.repositories import GameRepository
-        game = GameRepository.get_active_game(db, current_user.id)
-        if not game:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Nenhum jogo ativo encontrado"
-            )
-        return {
-            "game_id": game.id,
-            "secret_code": game.secret_code,
-            "status": "revealed"
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
-
-
 @router.post(
     "/start",
     response_model=GameResponse,

@@ -1,24 +1,55 @@
 /* Estilos do Componente de Login */
 
+.et-alien {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  z-index: 20;
+  position: relative;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 0, 0.6));
+  animation: floatAlien 3s ease-in-out infinite;
+}
+
+@keyframes floatAlien {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
 .login-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  background: #000000;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 60px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 50px 50px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 10px, #eee, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  background-attachment: fixed;
 }
 
 .login-card {
-  background: #252525;
+  background: rgba(0, 255, 0, 0.08);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 40px rgba(0, 255, 0, 0.6), inset 0 0 40px rgba(0, 255, 0, 0.1);
   width: 100%;
   max-width: 400px;
   z-index: 10;
   animation: slideIn 0.5s ease-out;
-  border: 1px solid #3a3a3a;
+  border: 2px solid #00ff00;
 }
 
 @keyframes slideIn {
@@ -32,9 +63,43 @@
   }
 }
 
+.missao-container-card {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 1s ease-out;
+}
+
+.missao-titulo-card {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.missao-texto-card {
+  color: #bbb;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .login-title {
   text-align: center;
-  color: #c9a84c;
+  color: #ffffff;
   margin: 0 0 1.5rem 0;
   font-size: 1.8rem;
   letter-spacing: 1px;
@@ -71,8 +136,8 @@
 
 .input:focus {
   outline: none;
-  border-color: #c9a84c;
-  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  border-color: #00ff00;
+  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.3);
 }
 
 .input:disabled {
@@ -92,7 +157,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #c9a84c 0%, #a07e2e 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #dddddd 100%);
   color: #111;
   min-height: 44px;
   font-weight: 700;
@@ -100,7 +165,7 @@
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(201, 168, 76, 0.3);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:disabled {
@@ -111,7 +176,7 @@
 .btn-link {
   background: none;
   border: none;
-  color: #c9a84c;
+  color: #ffffff;
   cursor: pointer;
   font-weight: 600;
   padding: 0;
@@ -121,7 +186,7 @@
 }
 
 .btn-link:hover {
-  color: #dfc06a;
+  color: #dddddd;
 }
 
 .btn-link:disabled {
@@ -175,23 +240,26 @@
 .decoracao {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.05;
+  opacity: 0;
+  display: none;
 }
 
 .decoracao-esquerda {
   width: 300px;
   height: 300px;
-  background: #c9a84c;
+  background: #ffffff;
   top: -150px;
   left: -150px;
+  display: none;
 }
 
 .decoracao-direita {
   width: 300px;
   height: 300px;
-  background: #c9a84c;
+  background: #ffffff;
   bottom: -150px;
   right: -150px;
+  display: none;
 }
 
 /* Responsivo */
