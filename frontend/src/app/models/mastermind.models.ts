@@ -1,7 +1,3 @@
-/**
- * Modelos de dados para a aplicação Mastermind.
- */
-
 export interface User {
   id: string;
   email: string;

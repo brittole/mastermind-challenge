@@ -1,6 +1,5 @@
 """
-Módulo de configuração da aplicação FastAPI.
-Gerencia variáveis de ambiente e configurações da aplicação.
+Configurações da aplicação via variáveis de ambiente.
 """
 
 from pydantic_settings import BaseSettings
@@ -8,25 +7,22 @@ from functools import lru_cache
 
 
 class Settings(BaseSettings):
-    """
-    Configurações da aplicação carregadas de variáveis de ambiente.
-    Usa pydantic-settings para validação e conversão de tipos.
-    """
+    """Configurações carregadas de variáveis de ambiente."""
     
-    # Configuração do Banco de Dados
+    # Banco de Dados
     database_url: str = "postgresql://user:password@localhost/mastermind_db"
     
-    # Configuração JWT
+    # JWT
     secret_key: str = "your-secret-key-here"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     
-    # Configuração da Aplicação
+    # App
     debug: bool = False
     host: str = "0.0.0.0"
     port: int = 8000
     
-    # Configuração do Jogo
+    # Jogo
     mastermind_code_length: int = 4
     mastermind_colors: list = ["red", "blue", "green", "yellow", "white", "black"]
     max_attempts: int = 10
@@ -38,11 +34,5 @@ class Settings(BaseSettings):
 
 @lru_cache()
 def get_settings() -> Settings:
-    """
-    Obtém instância de configurações em cache.
-    Esta função é cacheada para evitar ler variáveis de ambiente múltiplas vezes.
-    
-    Retorna:
-        Settings: Instância das configurações da aplicação
-    """
+    """Instância de configurações em cache."""
     return Settings()

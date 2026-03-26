@@ -1,8 +1,3 @@
-/**
- * Serviço HTTP para comunicação com a API do Mastermind.
- * Responsável por todas as requisições REST para o backend.
- */
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';

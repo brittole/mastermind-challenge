@@ -1,6 +1,5 @@
 """
-Modelos de banco de dados para o jogo Mastermind.
-Usa SQLAlchemy ORM para operações com banco de dados.
+Modelos de banco de dados (SQLAlchemy ORM).
 """
 
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, JSON, Boolean
@@ -24,18 +23,7 @@ Base = declarative_base()
 
 
 class User(Base):
-    """
-    Modelo de Usuário - representa um jogador no jogo.
-    
-    Atributos:
-        id: Identificador único do usuário (UUID)
-        email: Endereço de email do usuário (único)
-        username: Nome de usuário para login (único)
-        password_hash: Senha com hash (nunca armazenar em texto puro)
-        created_at: Timestamp de criação da conta
-        updated_at: Timestamp da última atualização
-        games: Relacionamento com todos os jogos jogados por este usuário
-    """
+    """Modelo de usuário/jogador."""
     
     __tablename__ = "users"
     
@@ -54,21 +42,7 @@ class User(Base):
 
 
 class Game(Base):
-    """
-    Modelo de Jogo - representa uma única sessão de jogo.
-    
-    Atributos:
-        id: Identificador único do jogo (UUID)
-        user_id: Referência ao jogador (chave estrangeira)
-        secret_code: A resposta correta (armazenada como array JSON de cores)
-        status: Status atual do jogo (iniciado, vencido, perdido)
-        started_at: Timestamp de início do jogo
-        ended_at: Timestamp de término do jogo (nulo se em andamento)
-        final_score: Pontuação final do jogo baseada em tentativas e tempo
-        attempts_count: Número de tentativas realizadas
-        attempts: Relacionamento com todas as tentativas neste jogo
-        user: Relacionamento de volta para o usuário
-    """
+    """Modelo de jogo (uma sessão de jogo)."""
     
     __tablename__ = "games"
     
@@ -102,19 +76,7 @@ class Game(Base):
 
 
 class Attempt(Base):
-    """
-    Modelo de Tentativa - representa uma única tentativa num jogo.
-    
-    Atributos:
-        id: Identificador único da tentativa (UUID)
-        game_id: Referência ao jogo (chave estrangeira)
-        guess: A tentativa do jogador (armazenada como array JSON de cores)
-        correct_positions: Número de cores na posição correta (peças pretas)
-        correct_colors: Número de cores corretas mas na posição errada (peças brancas)
-        attempt_number: Número sequencial da tentativa (1 a 10)
-        created_at: Timestamp da tentativa
-        game: Relacionamento de volta para o jogo
-    """
+    """Modelo de tentativa numa partida."""
     
     __tablename__ = "attempts"
     

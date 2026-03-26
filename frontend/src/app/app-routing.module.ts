@@ -5,16 +5,6 @@ import { GameComponent } from './components/game/game.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { AuthGuard } from './guards/auth.guard';
 
-/**
- * Rotas da Aplicação
- * 
- * Define:
- * - Rota de login (pública)
- * - Rota de jogo (protegida)
- * - Rota de ranking (protegida)
- * - Redirecionamento padrão
- * - Página 404
- */
 const routes: Routes = [
   {
     path: 'login',
@@ -41,9 +31,6 @@ const routes: Routes = [
   }
 ];
 
-/**
- * Módulo de Roteamento
- */
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     enableTracing: false /* Mude para true para debug de rotas */

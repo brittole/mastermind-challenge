@@ -1,6 +1,5 @@
 """
-Módulo de serviços - Camada de lógica de negócio.
-Os serviços orquestram repositórios e implementam a lógica de negócio.
+Camada de serviços / lógica de negócio.
 """
 
 from sqlalchemy.orm import Session
@@ -26,47 +25,17 @@ class AuthService:
     
     @staticmethod
     def hash_password(password: str) -> str:
-        """
-        Hash uma senha usando bcrypt.
-        
-        Args:
-            password: Senha em texto plano
-            
-        Returns:
-            str: Senha com hash
-        """
+        """Hash de senha usando Argon2."""
         return pwd_context.hash(password)
     
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
-        """
-        Verificar uma senha em texto plano contra um hash.
-        
-        Args:
-            plain_password: Senha em texto plano
-            hashed_password: Senha com hash
-            
-        Returns:
-            bool: True se a senha corresponde
-        """
+        """Verificar senha contra o hash."""
         return pwd_context.verify(plain_password, hashed_password)
     
     @staticmethod
     def create_user(db: Session, user_data: UserCreate) -> User:
-        """
-        Criar uma nova conta de usuário.
-        
-        Args:
-            db: Sessão de banco de dados
-            user_data: Dados de criação do usuário
-            
-        Returns:
-            User: Usuário criado
-            
-        Raises:
-            ValueError: Se um usuário com esse email ou nome de usuário já existe
-        """
-        # Verificar se o usuário já existe
+        """Criar nova conta de usuário. Levanta ValueError se já existir."""
         if UserRepository.user_exists(db, email=user_data.email):
             raise ValueError(f"Usuário com email '{user_data.email}' já existe")
         
@@ -79,17 +48,7 @@ class AuthService:
     
     @staticmethod
     def authenticate_user(db: Session, username: str, password: str) -> Optional[User]:
-        """
-        Autenticar um usuário por nome de usuário e senha.
-        
-        Args:
-            db: Sessão de banco de dados
-            username: Nome de usuário ou email
-            password: Senha em texto plano
-            
-        Returns:
-            User: Objeto do usuário se autenticação bem-sucedida, None caso contrário
-        """
+        """Autenticar usuário por username/email e senha. Retorna None se falhar."""
         # Tentar encontrar usuário por nome de usuário ou email
         user = UserRepository.get_by_username(db, username)
         if not user:
@@ -113,21 +72,7 @@ class GameService:
         self.mastermind = MastermindGame()
     
     def start_game(self, db: Session, user_id: str) -> Game:
-        """
-        Iniciar um novo jogo para um usuário.
-        
-        Um usuário pode ter apenas um jogo ativo por vez.
-        
-        Args:
-            db: Sessão de banco de dados
-            user_id: ID do usuário
-            
-        Returns:
-            Game: Novo objeto do jogo
-            
-        Raises:
-            ValueError: Se usuário já tem um jogo ativo
-        """
+        """Iniciar novo jogo. Usuário só pode ter um jogo ativo por vez."""
         # Verificar se usuário tem jogo ativo
         active_game = GameRepository.get_active_game(db, user_id)
         if active_game:
@@ -140,24 +85,7 @@ class GameService:
         return GameRepository.create(db, user_id, secret_code)
     
     def make_attempt(self, db: Session, game_id: str, guess: List[str]) -> Tuple[Game, int, int, bool]:
-        """
-        Processar uma tentativa do jogador.
-        
-        Args:
-            db: Sessão de banco de dados
-            game_id: ID do jogo
-            guess: Tentativa do jogador (lista de 4 cores)
-            
-        Returns:
-            Tuple contendo:
-                - Game: Objeto do jogo atualizado
-                - correct_positions: Número de posições corretas
-                - correct_colors: Número de cores corretas na posição errada
-                - is_won: Se o jogo foi ganho
-                
-        Raises:
-            ValueError: Se o jogo é inválido ou a tentativa é inválida
-        """
+        """Processar tentativa do jogador. Retorna (game, posicoes, cores, venceu)."""
         # Obter jogo
         game = GameRepository.get_by_id(db, game_id)
         if not game:
@@ -218,16 +146,7 @@ class GameService:
         return game, correct_positions, correct_colors, is_won
     
     def abandon_game(self, db: Session, game_id: str) -> Game:
-        """
-        Abandonar um jogo em andamento.
-        
-        Args:
-            db: Sessão de banco de dados
-            game_id: ID do jogo
-            
-        Returns:
-            Game: Objeto do jogo atualizado
-        """
+        """Abandonar jogo em andamento."""
         game = GameRepository.get_by_id(db, game_id)
         if not game:
             raise ValueError(f"Jogo {game_id} não encontrado")
@@ -269,21 +188,7 @@ class RankingService:
     
     @staticmethod
     def get_global_ranking(db: Session, limit: int = 100) -> List[PlayerRankingEntry]:
-        """
-        Obter classificação global de todos os jogadores.
-        
-        Classificação baseada em:
-        1. Taxa de vitória (percentual de jogos ganhos)
-        2. Melhor pontuação
-        3. Pontuação média
-        
-        Args:
-            db: Sessão de banco de dados
-            limit: Número máximo de jogadores a retornar
-            
-        Returns:
-            List[PlayerRankingEntry]: Lista ordenada de classificações de jogadores
-        """
+        """Obter classificação global ordenada por taxa de vitória e melhor pontuação."""
         # Obter todos os usuários
         users = UserRepository.get_all(db, limit=limit)
         
@@ -338,16 +243,7 @@ class RankingService:
     
     @staticmethod
     def get_user_stats(db: Session, user_id: str) -> Dict:
-        """
-        Obter estatísticas para um usuário específico.
-        
-        Args:
-            db: Sessão de banco de dados
-            user_id: ID do usuário
-            
-        Returns:
-            Dict com estatísticas do usuário
-        """
+        """Obter estatísticas de um usuário específico."""
         user = UserRepository.get_by_id(db, user_id)
         if not user:
             raise ValueError(f"Usuário {user_id} não encontrado")

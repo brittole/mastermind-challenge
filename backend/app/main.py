@@ -1,6 +1,5 @@
 """
-Factory da aplicação FastAPI e configuração.
-Ponto de entrada principal para o backend do jogo Mastermind.
+Factory da aplicação FastAPI.
 """
 
 from fastapi import FastAPI, Request, status
@@ -26,10 +25,7 @@ SessionLocal = None
 
 
 def initialize_database():
-    """
-    Inicializa conexão com banco de dados e cria as tabelas.
-    Chamar isto uma vez na inicialização da aplicação.
-    """
+    """Inicializa conexão com banco de dados e cria tabelas."""
     global engine, SessionLocal
     
     settings = get_settings()
@@ -37,8 +33,8 @@ def initialize_database():
     # Criar engine de banco de dados
     engine = create_engine(
         settings.database_url,
-        echo=settings.debug,  # Imprimir statements SQL em modo debug
-        pool_pre_ping=True,   # Verificar conexões antes de usá-las
+        echo=settings.debug,
+        pool_pre_ping=True,
         pool_size=10,
         max_overflow=20
     )
@@ -53,10 +49,7 @@ def initialize_database():
 
 
 def get_db():
-    """
-    Dependência para obter sessão de banco de dados.
-    Gera uma sessão durante a duração de uma requisição.
-    """
+    """Dependência para obter sessão de banco de dados."""
     if SessionLocal is None:
         raise RuntimeError("Banco de dados não inicializado. Chamar initialize_database() primeiro.")
     
@@ -67,7 +60,6 @@ def get_db():
         db.close()
 
 
-# Configurar a dependência no módulo de dependências
 def setup_dependencies():
     """Configurar a dependência get_db com SessionLocal da app."""
     import app.dependencies as deps
@@ -75,12 +67,7 @@ def setup_dependencies():
 
 
 def create_app() -> FastAPI:
-    """
-    Criar e configurar aplicação FastAPI.
-    
-    Retorna:
-        FastAPI: Instância da aplicação configurada
-    """
+    """Criar e configurar a aplicação FastAPI."""
     settings = get_settings()
     
     # Criar instância FastAPI
@@ -116,10 +103,9 @@ def create_app() -> FastAPI:
     app.include_router(games.router)
     app.include_router(rankings.router)
     
-    # Manipuladores de erro global
     @app.exception_handler(ValueError)
     async def value_error_handler(request: Request, exc: ValueError):
-        """Tratar exceções ValueError."""
+        """Tratar ValueError."""
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
             content={"detail": str(exc), "status_code": 400}

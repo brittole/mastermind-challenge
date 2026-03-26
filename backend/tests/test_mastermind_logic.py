@@ -1,6 +1,5 @@
 """
-Testes unitários para a lógica do jogo Mastermind.
-Testa os mecanismos principais do jogo e pontuação.
+Testes da lógica do jogo.
 """
 
 import pytest

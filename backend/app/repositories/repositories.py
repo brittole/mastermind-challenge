@@ -1,6 +1,5 @@
 """
-Módulo de repositório para acesso ao banco de dados.
-Implementa o padrão Repository para abstrair lógica de acesso a dados.
+Repositórios para acesso ao banco de dados.
 """
 
 from sqlalchemy.orm import Session
@@ -16,17 +15,7 @@ class UserRepository:
     
     @staticmethod
     def create(db: Session, user_data: UserCreate, password_hash: str) -> User:
-        """
-        Criar um novo usuário no banco de dados.
-        
-        Args:
-            db: Sessão SQLAlchemy
-            user_data: Dados de criação do usuário
-            password_hash: Senha com hash
-            
-        Returns:
-            User: Objeto do usuário criado
-        """
+        """Criar novo usuário."""
         user = User(
             email=user_data.email,
             username=user_data.username,
@@ -73,17 +62,7 @@ class GameRepository:
     
     @staticmethod
     def create(db: Session, user_id: str, secret_code: List[str]) -> Game:
-        """
-        Criar um novo jogo para um usuário.
-        
-        Args:
-            db: Sessão SQLAlchemy
-            user_id: ID do usuário
-            secret_code: Código secreto como uma lista
-            
-        Returns:
-            Game: Objeto do jogo criado
-        """
+        """Criar novo jogo para um usuário."""
         game = Game(
             user_id=user_id,
             secret_code=secret_code,
@@ -116,18 +95,7 @@ class GameRepository:
     
     @staticmethod
     def end_game(db: Session, game_id: str, status: str, score: float) -> Game:
-        """
-        Finalizar um jogo com pontuação e status final.
-        
-        Args:
-            db: Sessão SQLAlchemy
-            game_id: ID do jogo
-            status: Status final (won ou lost)
-            score: Pontuação final
-            
-        Returns:
-            Game: Objeto do jogo atualizado
-        """
+        """Finalizar jogo com pontuação e status."""
         game = db.query(Game).filter(Game.id == game_id).first()
         if game:
             game.status = status
@@ -153,17 +121,7 @@ class AttemptRepository:
     
     @staticmethod
     def create(db: Session, game_id: str, attempt_data: dict) -> Attempt:
-        """
-        Criar uma nova tentativa em um jogo.
-        
-        Args:
-            db: Sessão SQLAlchemy
-            game_id: ID do jogo
-            attempt_data: Dicionário com guess, correct_positions, correct_colors, attempt_number
-            
-        Returns:
-            Attempt: Objeto da tentativa criada
-        """
+        """Criar nova tentativa."""
         attempt = Attempt(
             game_id=game_id,
             guess=attempt_data["guess"],

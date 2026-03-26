@@ -1,6 +1,5 @@
 """
-Rotas da API de Autenticação.
-Trata de registro de usuário e login.
+Rotas de autenticação (registro e login).
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -33,19 +32,7 @@ def register(
     user_data: UserCreate,
     db: Session = Depends(get_db)
 ) -> TokenResponse:
-    """
-    Registrar um novo usuário.
-    
-    Args:
-        user_data: Dados de registro do usuário (email, nome de usuário, senha)
-        db: Sessão de banco de dados
-        
-    Returns:
-        TokenResponse: Token de acesso e informações do usuário
-        
-    Raises:
-        HTTPException 400: Se o usuário já existe
-    """
+    """Registrar novo usuário e retornar token."""
     try:
         # Criar usuário
         user = AuthService.create_user(db, user_data)
@@ -80,19 +67,7 @@ def login(
     credentials: LoginRequest,
     db: Session = Depends(get_db)
 ) -> TokenResponse:
-    """
-    Fazer login de um usuário.
-    
-    Args:
-        credentials: Credenciais de login (nome de usuário/email, senha)
-        db: Sessão de banco de dados
-        
-    Returns:
-        TokenResponse: Token de acesso e informações do usuário
-        
-    Raises:
-        HTTPException 401: Se as credenciais são inválidas
-    """
+    """Fazer login e retornar token."""
     # Autenticar usuário
     user = AuthService.authenticate_user(db, credentials.email, credentials.password)
     

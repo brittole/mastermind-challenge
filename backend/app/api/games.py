@@ -1,6 +1,5 @@
 """
-Rotas da API de Jogos.
-Trata de criação de jogo, tentativas e estado do jogo.
+Rotas de jogos (criar, jogar, abandonar).
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -36,19 +35,7 @@ def get_active_game(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> GameResponse:
-    """
-    Obter o jogo ativo do usuário.
-    
-    Args:
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        GameResponse: Jogo ativo, ou None se não houver
-        
-    Raises:
-        HTTPException 404: Se nãohouver jogo ativo
-    """
+    """Obter o jogo ativo do usuário."""
     try:
         from app.repositories.repositories import GameRepository
         game = GameRepository.get_active_game(db, current_user.id)
@@ -78,19 +65,7 @@ def start_game(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> GameResponse:
-    """
-    Iniciar um novo jogo.
-    
-    Args:
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        GameResponse: Novo jogo com lista vazia de tentativas
-        
-    Raises:
-        HTTPException 400: Se o usuário já tem um jogo ativo
-    """
+    """Iniciar novo jogo."""
     try:
         game = game_service.start_game(db, current_user.id)
         
@@ -116,21 +91,7 @@ def get_game(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> GameResponse:
-    """
-    Obter estado atual do jogo.
-    
-    Args:
-        game_id: ID do jogo
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        GameResponse: Estado do jogo com todas as tentativas
-        
-    Raises:
-        HTTPException 404: Se o jogo não for encontrado
-        HTTPException 401: Se o jogo não pertence ao usuário
-    """
+    """Obter estado atual do jogo."""
     try:
         game = game_service.get_game(db, game_id)
         
@@ -161,23 +122,7 @@ def make_attempt(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> AttemptResponse:
-    """
-    Fazer uma tentativa/adivinhar em um jogo.
-    
-    Args:
-        game_id: ID do jogo
-        attempt_data: Dados de adivinhar (lista de 4 cores)
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        AttemptResponse: Retorno sobre a adivinhar
-        
-    Raises:
-        HTTPException 400: Se a adivinhar é inválida ou contador de tentativas excedido
-        HTTPException 404: Se o jogo não for encontrado
-        HTTPException 401: Se o jogo não pertence ao usuário
-    """
+    """Fazer tentativa e receber feedback."""
     try:
         # Verificar propriedade do jogo
         game = game_service.get_game(db, game_id)
@@ -221,23 +166,7 @@ def get_game_result(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> GameResultResponse:
-    """
-    Obter resultado completo do jogo com código secreto revelado.
-    Só retorna o código secreto quando o jogo está finalizado.
-    
-    Args:
-        game_id: ID do jogo
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        GameResultResponse: Jogo com código secreto se finalizado
-        
-    Raises:
-        HTTPException 404: Se o jogo não for encontrado
-        HTTPException 401: Se o jogo não pertence ao usuário
-        HTTPException 400: Se o jogo ainda está ativo
-    """
+    """Obter resultado completo com código secreto (só quando finalizado)."""
     try:
         game = game_service.get_game(db, game_id)
         
@@ -276,22 +205,7 @@ def abandon_game(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> GameResponse:
-    """
-    Abandonar um jogo em andamento.
-    
-    Args:
-        game_id: ID do jogo
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        GameResponse: Jogo atualizado (marcado como perdido)
-        
-    Raises:
-        HTTPException 400: Se o jogo já está finalizado
-        HTTPException 404: Se o jogo não for encontrado
-        HTTPException 401: Se o jogo não pertence ao usuário
-    """
+    """Abandonar jogo (marcado como perdido)."""
     try:
         game = game_service.get_game(db, game_id)
         
@@ -322,15 +236,6 @@ def get_user_games(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ) -> List[GameResponse]:
-    """
-    Obter todos os jogos do usuário atual.
-    
-    Args:
-        current_user: Usuário autenticado
-        db: Sessão de banco de dados
-        
-    Returns:
-        List[GameResponse]: Lista de todos os jogos do usuário
-    """
+    """Obter todos os jogos do usuário."""
     games = game_service.get_user_games(db, current_user.id)
     return [GameResponse.from_orm(game) for game in games]

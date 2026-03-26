@@ -4,12 +4,6 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ApiService } from '../services/api.service';
 
-/**
- * Protetor de Rota de Autenticação
- * 
- * Verifica se o usuário está autenticado antes de acessar rotas protegidas.
- * Se não estiver, redireciona para a página de login.
- */
 @Injectable({
   providedIn: 'root'
 })

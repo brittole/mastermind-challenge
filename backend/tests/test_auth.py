@@ -1,5 +1,5 @@
 """
-Testes unitários para funcionalidade de autenticação.
+Testes de autenticação.
 """
 
 import pytest

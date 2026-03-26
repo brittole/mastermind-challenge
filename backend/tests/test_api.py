@@ -1,5 +1,5 @@
 """
-Testes de integração para endpoints da API.
+Testes dos endpoints da API.
 """
 
 import pytest

@@ -1,5 +1,5 @@
 """
-Configuração de Pytest e fixtures compartilhadas.
+Fixtures compartilhadas para testes.
 """
 
 import pytest

@@ -3,16 +3,6 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Game, Attempt, COLOR_MAP, COLORS } from '../../models/mastermind.models';
 
-/**
- * Componente do Tabuleiro de Jogo
- * 
- * Responsável por:
- * - Iniciar novo jogo
- * - Exibir histórico de tentativas
- * - Permitir seleção de cores para palpites
- * - Mostrar feedback das tentativas
- * - Gerenciar estado do jogo
- */
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',

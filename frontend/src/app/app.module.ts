@@ -10,15 +10,6 @@ import { LoginComponent } from './components/login/login.component';
 import { GameComponent } from './components/game/game.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 
-/**
- * Módulo Principal da Aplicação
- * 
- * Declara e configura:
- * - Componentes
- * - Módulos necessários (HttpClient, Forms, etc)
- * - Serviços
- * - Rotas
- */
 @NgModule({
   declarations: [
     AppComponent,

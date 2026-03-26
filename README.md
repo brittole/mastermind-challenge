@@ -194,15 +194,34 @@ CREATE DATABASE mastermind_db;
 
 ### Passo 3: Configurar e Rodar o Backend (FastAPI)
 
-#### 3.1 Entrar no diretorio backend
+#### 3.1 Criar e ativar o Ambiente Virtual Python
+
+A partir da **raiz do projeto** (`mastermind-challenge/`), crie o ambiente virtual:
+
+```bash
+# Windows
+python -m venv .venv
+.venv\Scripts\activate
+
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Apos ativar, voce deve ver `(.venv)` no inicio da linha do terminal.
+
+#### 3.2 Entrar no diretorio backend e instalar dependencias
 
 ```bash
 cd backend
+pip install -r requirements.txt
 ```
 
-#### 3.2 Criar o arquivo de variaveis de ambiente
+Isso instala: FastAPI, Uvicorn, SQLAlchemy, psycopg2, Pydantic, python-jose (JWT), Argon2, Pytest, entre outros.
 
-Copie o modelo `.env.example` para `.env`:
+#### 3.3 Criar o arquivo de variaveis de ambiente
+
+Ainda dentro de `backend/`, copie o modelo `.env.example` para `.env`:
 
 ```bash
 # macOS / Linux
@@ -245,31 +264,9 @@ PORT=8000
 
 > **Importante:** O arquivo `.env` ja esta no `.gitignore`. **Nunca suba ele para o repositorio.**
 
-#### 3.3 Criar e ativar o Ambiente Virtual Python
+#### 3.4 Inicializar as tabelas no Banco de Dados
 
-```bash
-# Windows
-python -m venv .venv
-.venv\Scripts\activate
-
-# macOS / Linux
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Apos ativar, voce deve ver `(.venv)` no inicio da linha do terminal.
-
-> **Nota:** O ambiente virtual e criado na raiz do projeto (`.venv/`), nao dentro de `backend/`. Isso e intencional — o mesmo venv serve para todo o backend.
-
-#### 3.4 Instalar as dependencias Python
-
-```bash
-pip install -r requirements.txt
-```
-
-Isso instala: FastAPI, Uvicorn, SQLAlchemy, psycopg2, Pydantic, python-jose (JWT), Argon2, Pytest, entre outros.
-
-#### 3.5 Inicializar as tabelas no Banco de Dados
+Ainda dentro de `backend/`:
 
 ```bash
 python setup_database.py
@@ -294,15 +291,11 @@ Voce deve ver a saida:
 
 > **Se der erro de conexao:** verifique se o PostgreSQL esta rodando, se a senha esta correta no `.env`, e se o banco `mastermind_db` foi criado no passo 2.3.
 
-#### 3.6 Rodar o Backend (modo desenvolvimento)
+#### 3.5 Rodar o Backend (modo desenvolvimento)
 
-> **IMPORTANTE:** Voce DEVE estar dentro da pasta `backend/` para rodar este comando. Se rodar da raiz do projeto, vai dar erro `ModuleNotFoundError: No module named 'app'`.
+Ainda dentro de `backend/`, rode:
 
 ```bash
-# Confirme que esta dentro de backend/
-cd backend
-
-# Rodar o servidor
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
@@ -313,7 +306,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000
 INFO:     Started reloader process
 ```
 
-> **Se der `ModuleNotFoundError: No module named 'app'`:** voce provavelmente esta no diretorio errado. Rode `cd backend` e tente novamente.
+> **Erro `ModuleNotFoundError: No module named 'app'`?** Esse erro acontece quando o comando e executado fora da pasta `backend/`. Confirme com `pwd` (Linux/macOS) ou `Get-Location` (PowerShell) que voce esta em `mastermind-challenge/backend/` e tente novamente.
 
 | URL | O que e |
 |-----|---------|
@@ -393,13 +386,13 @@ Se os 3 estao funcionando, o projeto esta pronto para uso!
 Os testes do backend sao **100% automatizados** usando **Pytest**. Nao precisam do PostgreSQL real — usam um banco **SQLite em memoria** que e criado e destruido automaticamente.
 
 ```bash
-cd backend
-
-# Ativar o ambiente virtual (se ainda nao estiver ativo)
+# Ativar o ambiente virtual na raiz do projeto (se ainda nao estiver ativo)
 # Windows
 .venv\Scripts\activate
 # macOS / Linux
 source .venv/bin/activate
+
+cd backend
 
 # Rodar todos os testes
 pytest
@@ -618,7 +611,9 @@ ng serve --port 4201
 ### Modulo Python nao encontrado
 
 ```bash
-# Garantir que o venv esta ativado
+# Volte para a raiz do projeto e ative o venv
+cd mastermind-challenge
+
 # Windows
 .venv\Scripts\activate
 

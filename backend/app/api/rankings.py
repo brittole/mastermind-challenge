@@ -1,6 +1,5 @@
 """
-Rotas da API de Classificações.
-Trata de recuperação de classificação e estatísticas.
+Rotas de classificações.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -31,21 +30,7 @@ def get_global_ranking(
     limit: int = 100,
     db: Session = Depends(get_db)
 ) -> RankingResponse:
-    """
-    Obter classificação global.
-    
-    A classificação é calculada baseada em:
-    1. Taxa de vitória (percentual de jogos ganhos)
-    2. Melhor pontuação
-    3. Pontuação média
-    
-    Args:
-        limit: Número máximo de jogadores a retornar
-        db: Sessão de banco de dados
-        
-    Returns:
-        RankingResponse: Lista classificada de jogadores
-    """
+    """Obter classificação global dos jogadores."""
     try:
         players = RankingService.get_global_ranking(db, limit=limit)
         
@@ -81,27 +66,7 @@ def get_user_stats(
     user_id: str,
     db: Session = Depends(get_db)
 ):
-    """
-    Obter estatísticas de um usuário.
-    
-    Retorna:
-        Dicionário com estatísticas do usuário incluindo:
-        - Total de jogos jogados
-        - Jogos ganhos/perdidos
-        - Taxa de vitória
-        - Melhor e pontuação média
-        - Tentativas médias por jogo
-        
-    Args:
-        user_id: ID do usuário
-        db: Sessão de banco de dados
-        
-    Returns:
-        dict: Estatísticas do usuário
-        
-    Raises:
-        HTTPException 404: Se o usuário não for encontrado
-    """
+    """Obter estatísticas de um usuário específico."""
     try:
         stats = RankingService.get_user_stats(db, user_id)
         return stats

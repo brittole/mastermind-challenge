@@ -3,15 +3,6 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { RegisterRequest, LoginRequest } from '../../models/mastermind.models';
 
-/**
- * Componente de Autenticação
- * 
- * Responsável por:
- * - Registro de novos jogadores
- * - Login de usuários existentes
- * - Validação de entrada
- * - Gerenciamento de erros
- */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

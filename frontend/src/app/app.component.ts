@@ -1,7 +1,3 @@
-/**
- * Componente raiz da aplicação Mastermind.
- */
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './services/api.service';

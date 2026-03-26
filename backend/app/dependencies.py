@@ -1,5 +1,5 @@
 """
-Módulo de dependências - Gerencia autenticação JWT e injeção de dependências.
+Depênências de autenticação JWT e banco de dados.
 """
 
 from fastapi import Depends, HTTPException, status
@@ -13,18 +13,11 @@ from app.repositories.repositories import UserRepository
 from typing import Optional
 
 
-# ============================================================================
-# DEPENDÊNCIA DE BANCO DE DADOS
-# ============================================================================
-
-# Serão definidas globalmente quando a app for criada
+# Sessão de banco de dados (configurada na inicialização)
 SessionLocal = None
 
 def get_db() -> Session:
-    """
-    Dependência para obter sessão de banco de dados.
-    Esta função será configurada quando a aplicação for inicializada.
-    """
+    """Dependência para obter sessão de banco de dados."""
     if SessionLocal is None:
         raise RuntimeError("Banco de dados não inicializado. Chamar initialize_database() primeiro.")
     
@@ -35,24 +28,11 @@ def get_db() -> Session:
         db.close()
 
 
-# ============================================================================
-# JWT E AUTENTICAÇÃO
-# ============================================================================
-
 security = HTTPBearer()
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
-    """
-    Criar token de acesso JWT.
-    
-    Args:
-        data: Dados a codificar no token (ex: user_id)
-        expires_delta: Tempo de expiração customizado
-        
-    Retorna:
-        str: Token JWT codificado
-    """
+    """Criar token de acesso JWT."""
     settings = get_settings()
     
     to_encode = data.copy()
@@ -77,19 +57,7 @@ def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ):
-    """
-    Dependência para obter usuário autenticado atual do token JWT.
-    
-    Args:
-        credentials: Token HTTP bearer do header da requisição
-        db: Sessão de banco de dados
-        
-    Retorna:
-        User: Usuário autenticado atual
-        
-    Levanta:
-        HTTPException: Se token for inválido ou usuário não encontrado
-    """
+    """Obter usuário autenticado do token JWT."""
     settings = get_settings()
     
     token = credentials.credentials

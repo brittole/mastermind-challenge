@@ -2,15 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { PlayerRankingEntry, RankingResponse } from '../../models/mastermind.models';
 
-/**
- * Componente de Ranking
- * 
- * Responsável por:
- * - Exibir ranking global dos jogadores
- * - Mostrar estatísticas do usuário atual
- * - Permitir filtros por período
- * - Atualizar dados em tempo real
- */
 @Component({
   selector: 'app-ranking',
   templateUrl: './ranking.component.html',
@@ -56,7 +47,7 @@ export class RankingComponent implements OnInit {
   }
 
   /**
-   * Retorna a posição visual do jogador
+   * Retornaaa a posição visual do jogador
    */
   obterPosicao(indice: number): number {
     return indice + 1;
