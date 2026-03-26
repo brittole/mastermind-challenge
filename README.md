@@ -125,6 +125,13 @@ mastermind-challenge/
 
 ## Como Rodar Localmente
 
+> **Resumo rapido:** voce vai precisar de **3 terminais abertos** ao final:
+> 1. PostgreSQL rodando
+> 2. Backend (FastAPI) na porta 8000
+> 3. Frontend (Angular) na porta 4200
+
+---
+
 ### Passo 1: Clonar o Repositorio
 
 ```bash
@@ -132,29 +139,92 @@ git clone https://github.com/seu-usuario/mastermind-challenge.git
 cd mastermind-challenge
 ```
 
-### Passo 2: Configurar o Backend
+---
 
-#### 2.1 Entrar no diretorio backend
+### Passo 2: Instalar e Configurar o PostgreSQL
+
+O projeto usa **PostgreSQL** como banco de dados. Voce precisa dele instalado e rodando na sua maquina.
+
+#### 2.1 Instalar o PostgreSQL
+
+| Sistema | Comando / Instrucao |
+|---------|---------------------|
+| **Windows** | Baixe o instalador em https://www.postgresql.org/download/windows/ e siga o wizard. Durante a instalacao, **anote a senha** que voce definir para o usuario `postgres`. Marque a opcao para adicionar ao PATH. |
+| **macOS** | `brew install postgresql@15 && brew services start postgresql@15` |
+| **Linux (Ubuntu/Debian)** | `sudo apt update && sudo apt install postgresql postgresql-contrib -y && sudo systemctl start postgresql` |
+
+#### 2.2 Verificar se o PostgreSQL esta rodando
+
+```bash
+psql -U postgres -c "SELECT version();"
+```
+
+Se pedir senha, use a senha que voce definiu na instalacao. Se funcionar, voce vera a versao do PostgreSQL.
+
+> **Windows:** Se o comando `psql` nao for encontrado, adicione o diretorio `bin` do PostgreSQL ao PATH do sistema. O caminho depende da versao instalada:
+> - PostgreSQL 15: `C:\Program Files\PostgreSQL\15\bin`
+> - PostgreSQL 16: `C:\Program Files\PostgreSQL\16\bin`
+> - PostgreSQL 17: `C:\Program Files\PostgreSQL\17\bin`
+>
+> Para descobrir qual versao voce tem, abra `C:\Program Files\PostgreSQL\` e veja a pasta que existe la dentro.
+>
+> **Como adicionar ao PATH temporariamente (so nessa sessao do PowerShell):**
+> ```powershell
+> $env:Path += ";C:\Program Files\PostgreSQL\17\bin"   # troque 17 pela sua versao
+> ```
+>
+> **Como adicionar ao PATH permanentemente:** Pesquise "Variaveis de Ambiente" no menu Iniciar → Edite a variavel `Path` do sistema → Adicione o caminho do `bin`.
+
+#### 2.3 Criar o Banco de Dados
+
+```bash
+psql -U postgres
+```
+
+Dentro do prompt do PostgreSQL, execute:
+
+```sql
+CREATE DATABASE mastermind_db;
+\q
+```
+
+> **Dica:** Se voce quiser usar um usuario/senha diferente de `postgres`, basta ajustar a `DATABASE_URL` no passo 3.2.
+
+---
+
+### Passo 3: Configurar e Rodar o Backend (FastAPI)
+
+#### 3.1 Entrar no diretorio backend
 
 ```bash
 cd backend
 ```
 
-#### 2.2 Criar variaveis de ambiente
+#### 3.2 Criar o arquivo de variaveis de ambiente
 
-Crie um arquivo `.env` na pasta `backend/` a partir do modelo:
+Copie o modelo `.env.example` para `.env`:
 
 ```bash
+# macOS / Linux
 cp .env.example .env
+
+# Windows (CMD)
+copy .env.example .env
+
+# Windows (PowerShell)
+Copy-Item .env.example .env
 ```
 
-Edite o arquivo `.env` com as suas credenciais:
+Agora abra o arquivo `backend/.env` no seu editor e preencha com os seus dados reais:
 
 ```env
 # Banco de Dados
+# Formato: postgresql://USUARIO:SENHA@HOST:PORTA/NOME_DO_BANCO
+# Substitua "SUA_SENHA" pela senha do seu usuario postgres
 DATABASE_URL=postgresql://postgres:SUA_SENHA@localhost:5432/mastermind_db
 
 # JWT e Seguranca
+# Gere uma chave secreta forte (ex: openssl rand -hex 32)
 SECRET_KEY=gere-uma-chave-secreta-longa-e-aleatoria
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
@@ -165,88 +235,139 @@ HOST=0.0.0.0
 PORT=8000
 ```
 
-**Importante:** Nunca suba o arquivo `.env` para o repositorio. Ele ja esta no `.gitignore`.
+| Variavel | O que colocar | Exemplo |
+|----------|---------------|---------|
+| `DATABASE_URL` | URL de conexao com o PostgreSQL. Troque `SUA_SENHA` pela senha real do usuario `postgres`. | `postgresql://postgres:minhasenha123@localhost:5432/mastermind_db` |
+| `SECRET_KEY` | Uma string longa e aleatoria para assinar os tokens JWT. | `a3f8c9e1b7d04...` (use `openssl rand -hex 32` ou `python -c "import secrets; print(secrets.token_hex(32))"`) |
+| `ALGORITHM` | Algoritmo de assinatura JWT. Mantenha `HS256`. | `HS256` |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | Tempo (em minutos) de validade do token. | `30` |
+| `DEBUG` | Modo debug — `true` para desenvolvimento. | `true` |
 
-#### 2.3 Criar Banco de Dados PostgreSQL
+> **Importante:** O arquivo `.env` ja esta no `.gitignore`. **Nunca suba ele para o repositorio.**
 
-Abra o terminal do PostgreSQL:
-
-```bash
-psql -U postgres
-```
-
-Execute:
-
-```sql
-CREATE DATABASE mastermind_db;
-\q
-```
-
-#### 2.4 Criar Ambiente Virtual
+#### 3.3 Criar e ativar o Ambiente Virtual Python
 
 ```bash
 # Windows
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\activate
 
 # macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-#### 2.5 Instalar Dependencias
+Apos ativar, voce deve ver `(.venv)` no inicio da linha do terminal.
+
+> **Nota:** O ambiente virtual e criado na raiz do projeto (`.venv/`), nao dentro de `backend/`. Isso e intencional — o mesmo venv serve para todo o backend.
+
+#### 3.4 Instalar as dependencias Python
 
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 2.6 Inicializar Banco de Dados
+Isso instala: FastAPI, Uvicorn, SQLAlchemy, psycopg2, Pydantic, python-jose (JWT), Argon2, Pytest, entre outros.
+
+#### 3.5 Inicializar as tabelas no Banco de Dados
 
 ```bash
 python setup_database.py
 ```
 
-Este script cria as tabelas necessarias (users, games, attempts) no PostgreSQL.
+Este script conecta no PostgreSQL usando a `DATABASE_URL` do seu `.env` e cria as tabelas:
+- `users` — cadastro de jogadores
+- `games` — partidas (codigo secreto, status, pontuacao)
+- `attempts` — tentativas de cada partida
 
-#### 2.7 Rodar Backend (Desenvolvimento)
+Voce deve ver a saida:
+
+```
+[*] Conectando ao PostgreSQL...
+[OK] Conectado ao PostgreSQL!
+[OK] Tabela 'users' criada
+[OK] Tabela 'games' criada
+[OK] Tabela 'attempts' criada
+[OK] Indices criados
+[SUCESSO] PostgreSQL inicializado com sucesso!
+```
+
+> **Se der erro de conexao:** verifique se o PostgreSQL esta rodando, se a senha esta correta no `.env`, e se o banco `mastermind_db` foi criado no passo 2.3.
+
+#### 3.6 Rodar o Backend (modo desenvolvimento)
+
+> **IMPORTANTE:** Voce DEVE estar dentro da pasta `backend/` para rodar este comando. Se rodar da raiz do projeto, vai dar erro `ModuleNotFoundError: No module named 'app'`.
 
 ```bash
+# Confirme que esta dentro de backend/
+cd backend
+
+# Rodar o servidor
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Backend rodando em: http://localhost:8000
+Se tudo estiver certo, voce vera:
 
-Documentacao da API (Swagger): http://localhost:8000/docs
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000
+INFO:     Started reloader process
+```
+
+> **Se der `ModuleNotFoundError: No module named 'app'`:** voce provavelmente esta no diretorio errado. Rode `cd backend` e tente novamente.
+
+| URL | O que e |
+|-----|---------|
+| http://localhost:8000 | API rodando |
+| http://localhost:8000/docs | Documentacao interativa (Swagger UI) |
+| http://localhost:8000/health | Health check da aplicacao |
+
+> **Mantenha este terminal aberto.** O backend precisa ficar rodando.
 
 ---
 
-### Passo 3: Configurar o Frontend
+### Passo 4: Configurar e Rodar o Frontend (Angular)
 
-#### 3.1 Em outra janela do terminal, ir para frontend
+> **Abra um novo terminal** (o backend deve continuar rodando no anterior).
+
+#### 4.1 Entrar no diretorio frontend
 
 ```bash
 cd frontend
 ```
 
-#### 3.2 Instalar Dependencias do Node.js
+> Se voce esta na raiz do projeto: `cd frontend`. Se esta em `backend/`: `cd ../frontend`.
+
+#### 4.2 Instalar as dependencias Node.js
 
 ```bash
 npm install
 ```
 
-#### 3.3 Rodar Frontend (Desenvolvimento)
+Isso baixa todas as dependencias do Angular listadas no `package.json`. Pode demorar alguns minutos na primeira vez.
 
-```bash
-ng serve --open
-```
-
-Ou:
+#### 4.3 Rodar o Frontend (modo desenvolvimento)
 
 ```bash
 npm start
 ```
 
-Frontend abrira em: http://localhost:4200
+Isso executa `ng serve --open`, que compila o Angular e abre o navegador automaticamente.
+
+O frontend estara disponivel em: **http://localhost:4200**
+
+> **Mantenha este terminal aberto tambem.** O frontend precisa ficar rodando.
+
+---
+
+### Checklist Final — Tudo Rodando?
+
+| Servico | URL | Como verificar |
+|---------|-----|----------------|
+| **PostgreSQL** | localhost:5432 | `psql -U postgres -c "SELECT 1;"` |
+| **Backend** | http://localhost:8000 | Abra http://localhost:8000/health no navegador — deve retornar `{"status": "saudável"}` |
+| **Frontend** | http://localhost:4200 | Abra no navegador — deve aparecer a tela de login do Mastermind |
+
+Se os 3 estao funcionando, o projeto esta pronto para uso!
 
 ---
 
@@ -267,21 +388,29 @@ Frontend abrira em: http://localhost:4200
 
 ## Executar Testes
 
-### Backend (Pytest)
+### Backend (Pytest — testes automatizados)
+
+Os testes do backend sao **100% automatizados** usando **Pytest**. Nao precisam do PostgreSQL real — usam um banco **SQLite em memoria** que e criado e destruido automaticamente.
 
 ```bash
 cd backend
 
-# Todos os testes
+# Ativar o ambiente virtual (se ainda nao estiver ativo)
+# Windows
+.venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
+
+# Rodar todos os testes
 pytest
 
-# Com relatorio de cobertura
+# Com relatorio de cobertura de codigo
 pytest --cov=app tests/
 
-# Teste especifico
+# Rodar um arquivo de teste especifico
 pytest tests/test_mastermind_logic.py -v
 
-# Modo verbose
+# Modo verbose (mostra cada teste individualmente)
 pytest -v
 ```
 
@@ -325,6 +454,42 @@ SECRET_KEY=sua-chave-secreta
 **O que inicia:**
 - **PostgreSQL** na porta 5432
 - **Backend FastAPI** na porta 8000
+
+---
+
+## Sistema de Pontuacao e Ranking
+
+### Pontuacao por partida
+
+Cada partida comeca com **1000 pontos**. Dois fatores descontam pontos:
+
+| Fator | Regra | Detalhe |
+|-------|-------|---------|
+| **Tentativas** | -50 pts por tentativa a partir da 3a | As 2 primeiras sao gratis |
+| **Tempo** | -1 pt por minuto de jogo | Quanto mais rapido, melhor |
+
+**Formula:** `pontos = max(0, 1000 - max(0, (tentativas - 2) * 50) - (segundos / 60))`
+
+**Exemplos:**
+
+| Cenario | Tentativas | Tempo | Pontos |
+|---------|:---:|:---:|:---:|
+| Perfeito | 1 | 30s | 999.5 |
+| Bom | 3 | 2min | 948.0 |
+| Medio | 5 | 5min | 845.0 |
+| Dificil | 8 | 10min | 690.0 |
+| Limite | 10 | 15min | 585.0 |
+
+- Pontuacao maxima possivel: **1000** (1 tentativa, 0 segundos)
+- Pontuacao minima: **0** (nunca fica negativa)
+
+### Ranking global
+
+Os jogadores sao classificados por:
+1. **Taxa de vitoria (%)** — quem ganha mais partidas fica acima
+2. **Melhor pontuacao** — em caso de empate, quem tem a maior pontuacao fica acima
+
+> Apenas jogos **ganhos** contam para melhor pontuacao e media. Jogos perdidos ou abandonados nao somam pontos no ranking.
 
 ---
 
@@ -407,21 +572,47 @@ Documentacao interativa completa: http://localhost:8000/docs
 psql -U postgres -c "SELECT version();"
 
 # Se nao funcionar, inicie o servico:
-# Windows
-pg_ctl start
+
+# Windows (PowerShell como Administrador)
+# O nome do servico depende da versao instalada (ex: postgresql-x64-15, postgresql-x64-17)
+# Primeiro descubra o nome exato:
+Get-Service *postgres*
+# Depois inicie com o nome correto:
+net start postgresql-x64-17
 
 # macOS
-brew services start postgresql
+brew services start postgresql@15
 
-# Linux
+# Linux (Ubuntu/Debian)
 sudo systemctl start postgresql
+sudo systemctl enable postgresql   # para iniciar automaticamente no boot
+```
+
+### Erro "password authentication failed"
+
+Sua senha do PostgreSQL esta errada no `.env`. Verifique a variavel `DATABASE_URL`:
+```env
+DATABASE_URL=postgresql://postgres:SENHA_CORRETA_AQUI@localhost:5432/mastermind_db
+```
+
+### Banco "mastermind_db" nao existe
+
+```bash
+psql -U postgres -c "CREATE DATABASE mastermind_db;"
 ```
 
 ### Porta 8000 ja em uso
 
 ```bash
-# Mudar porta
+# Mudar porta do backend
 python -m uvicorn app.main:app --reload --port 8001
+```
+
+### Porta 4200 ja em uso
+
+```bash
+# Mudar porta do frontend
+ng serve --port 4201
 ```
 
 ### Modulo Python nao encontrado
@@ -429,13 +620,23 @@ python -m uvicorn app.main:app --reload --port 8001
 ```bash
 # Garantir que o venv esta ativado
 # Windows
-venv\Scripts\activate
+.venv\Scripts\activate
 
 # macOS/Linux
-source venv/bin/activate
+source .venv/bin/activate
 
 # Reinstalar dependencias
+cd backend
 pip install -r requirements.txt
+```
+
+### `ModuleNotFoundError: No module named 'app'`
+
+Isso acontece quando voce roda o uvicorn fora da pasta `backend/`. O comando precisa ser executado de dentro dela:
+
+```bash
+cd backend
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### Erro de CORS no frontend
